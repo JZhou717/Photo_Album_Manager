@@ -27,19 +27,19 @@
                <children>
                   <Text layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="152.99999779462814" />
                   <ImageView fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button layoutX="71.0" layoutY="380.0" mnemonicParsing="false" text="Delete Photo" />
-                  <Button layoutX="251.0" layoutY="380.0" mnemonicParsing="false" text="Move to Album" />
-                  <Button layoutX="434.0" layoutY="380.0" mnemonicParsing="false" text="Copy to Album" />
+                  <Button onAction="#deletePhotoClick" layoutX="71.0" layoutY="380.0" mnemonicParsing="false" text="Delete Photo" />
+                  <Button onAction="#moveToAlbumClick" layoutX="251.0" layoutY="380.0" mnemonicParsing="false" text="Move to Album" />
+                  <Button onAction="#copyToAlbumClick" layoutX="434.0" layoutY="380.0" mnemonicParsing="false" text="Copy to Album" />
                   <Text layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="152.99999779462814" />
-                  <Button layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
+                  <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
                   <ListView layoutX="60.0" layoutY="482.0" prefHeight="107.0" prefWidth="200.0" />
                   <Text layoutX="60.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />
-                  <Button layoutX="273.0" layoutY="489.0" mnemonicParsing="false" text="Delete Selected Tag" />
-                  <Button layoutX="329.0" layoutY="574.0" mnemonicParsing="false" text="Add Tag" />
-                  <TextField layoutX="273.0" layoutY="536.0" promptText="Type, Value" />
+                  <Button onAction="#deleteTagClick" layoutX="273.0" layoutY="489.0" mnemonicParsing="false" text="Delete Selected Tag" />
+                  <Button onAction="#addTagClick" layoutX="329.0" layoutY="574.0" mnemonicParsing="false" text="Add Tag" />
+                  <TextField fx:id="tagToAddText" layoutX="273.0" layoutY="536.0" promptText="Type, Value" />
                </children>
             </AnchorPane>
-            <Button layoutX="816.0" layoutY="661.0" mnemonicParsing="false" text="Logout">
+            <Button onAction="#logoutClick" layoutX="816.0" layoutY="661.0" mnemonicParsing="false" text="Logout">
                <font>
                   <Font size="18.0" />
                </font>
@@ -51,10 +51,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <Button layoutX="86.0" layoutY="98.0" mnemonicParsing="false" text="Select Photo to Add" />
+                  <Button onAction="#selectPhotoClick" layoutX="86.0" layoutY="98.0" mnemonicParsing="false" text="Select Photo to Add" />
                </children>
             </AnchorPane>
-            <Button layoutX="534.0" layoutY="661.0" mnemonicParsing="false" text="Back to Albums">
+            <Button onAction="#backClick" layoutX="534.0" layoutY="661.0" mnemonicParsing="false" text="Back to Albums">
                <font>
                   <Font size="18.0" />
                </font>

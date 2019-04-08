@@ -27,8 +27,8 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <TextField layoutX="124.0" layoutY="86.0" />
-            <Button layoutX="214.0" layoutY="144.0" mnemonicParsing="false" text="Delete User" />
+            <TextField fx:id="usernameToDelete" layoutX="124.0" layoutY="86.0" />
+            <Button onAction="#deleteUserClick" layoutX="214.0" layoutY="144.0" mnemonicParsing="false" text="Delete User" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="461.0" layoutY="277.0" prefHeight="227.0" prefWidth="435.0" style="-fx-border-color: #000000;">
@@ -38,11 +38,11 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Text>
-            <Button layoutX="263.0" layoutY="158.0" mnemonicParsing="false" text="Add" />
-            <TextField layoutX="124.0" layoutY="102.0" />
+            <Button onAction="#addUserClick" layoutX="263.0" layoutY="158.0" mnemonicParsing="false" text="Add" />
+            <TextField fx:id="usernameToAdd" layoutX="124.0" layoutY="102.0" />
          </children>
       </AnchorPane>
-      <Button layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
+      <Button onAction="#logoutClick" layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
          <font>
             <Font size="18.0" />
          </font>

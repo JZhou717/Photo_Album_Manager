@@ -29,10 +29,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="124.0" layoutY="86.0" />
-                  <Button layoutX="282.0" layoutY="144.0" mnemonicParsing="false" text="Delete" />
-                  <Button layoutX="96.0" layoutY="144.0" mnemonicParsing="false" text="Open" />
-                  <Button layoutX="195.0" layoutY="144.0" mnemonicParsing="false" text="Edit" />
+                  <TextField fx:id="albumInfo" layoutX="124.0" layoutY="86.0" />
+                  <Button onAction="#deleteAlbumClick" layoutX="282.0" layoutY="144.0" mnemonicParsing="false" text="Delete" />
+                  <Button onAction="#openAlbumClick" layoutX="96.0" layoutY="144.0" mnemonicParsing="false" text="Open" />
+                  <Button onAction="#editAlbumClick" layoutX="195.0" layoutY="144.0" mnemonicParsing="false" text="Edit" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="461.0" layoutY="277.0" prefHeight="227.0" prefWidth="435.0" style="-fx-border-color: #000000;">
@@ -42,16 +42,16 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <Button layoutX="248.0" layoutY="157.0" mnemonicParsing="false" text="Create" />
-                  <TextField layoutX="124.0" layoutY="102.0" />
+                  <Button onAction="#createAlbumClick" layoutX="248.0" layoutY="157.0" mnemonicParsing="false" text="Create" />
+                  <TextField fx:id="newAlbumName" layoutX="124.0" layoutY="102.0" />
                </children>
             </AnchorPane>
-            <Button layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
+            <Button onAction="#logoutClick" layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
                <font>
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="461.0" layoutY="519.0" mnemonicParsing="false" text="Search for Photos">
+            <Button onAction="#goToSearchClick" layoutX="461.0" layoutY="519.0" mnemonicParsing="false" text="Search for Photos">
                <font>
                   <Font size="18.0" />
                </font>

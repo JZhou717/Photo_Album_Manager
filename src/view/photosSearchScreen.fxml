@@ -28,15 +28,15 @@
                   <Text layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="152.99999779462814" />
                   <ImageView fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
                   <Text layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="152.99999779462814" />
-                  <Button layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
+                  <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
                   <ListView layoutX="71.0" layoutY="420.0" prefHeight="107.0" prefWidth="200.0" />
                   <Text layoutX="71.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />
-                  <Button layoutX="281.0" layoutY="420.0" mnemonicParsing="false" text="Delete Selected Tag" />
-                  <Button layoutX="337.0" layoutY="496.0" mnemonicParsing="false" text="Add Tag" />
-                  <TextField layoutX="281.0" layoutY="458.0" promptText="Type, Value" />
+                  <Button onAction="#deleteTagClick" layoutX="281.0" layoutY="420.0" mnemonicParsing="false" text="Delete Selected Tag" />
+                  <Button onAction="#addTagClick" layoutX="337.0" layoutY="496.0" mnemonicParsing="false" text="Add Tag" />
+                  <TextField fx:id="tagToAdd" layoutX="281.0" layoutY="458.0" promptText="Type, Value" />
                </children>
             </AnchorPane>
-            <Button layoutX="812.0" layoutY="606.0" mnemonicParsing="false" text="Logout">
+            <Button onAction="#logoutClick" layoutX="812.0" layoutY="606.0" mnemonicParsing="false" text="Logout">
                <font>
                   <Font size="18.0" />
                </font>
@@ -48,12 +48,12 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <Button layoutX="186.0" layoutY="156.0" mnemonicParsing="false" text="Search" />
-                  <TextField layoutX="64.0" layoutY="73.0" promptText="Start Date" />
-                  <TextField layoutX="64.0" layoutY="125.0" promptText="End Date" />
+                  <Button onAction="#searchDateClick" layoutX="186.0" layoutY="156.0" mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="startDate" layoutX="64.0" layoutY="73.0" promptText="Start Date" />
+                  <TextField fx:id="endDate" layoutX="64.0" layoutY="125.0" promptText="End Date" />
                </children>
             </AnchorPane>
-            <Button layoutX="448.0" layoutY="606.0" mnemonicParsing="false" text="Back to Albums">
+            <Button onAction="#backClick" layoutX="448.0" layoutY="606.0" mnemonicParsing="false" text="Back to Albums">
                <font>
                   <Font size="18.0" />
                </font>
@@ -65,8 +65,8 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <TextField layoutX="14.0" layoutY="53.0" promptText="Start Date" />
-                  <Button layoutX="224.0" layoutY="63.0" mnemonicParsing="false" text="Search" />
+                  <TextField fx:id="tagToSearch" layoutX="14.0" layoutY="53.0"  />
+                  <Button onAction="#searchTagClick" layoutX="224.0" layoutY="63.0" mnemonicParsing="false" text="Search" />
                </children>
             </AnchorPane>
          </children>
