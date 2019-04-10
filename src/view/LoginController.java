@@ -2,11 +2,13 @@
 package view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 
-public class photosLoginScreenController {
+public class LoginController {
 	@FXML
 	public TextField username;
 	@FXML
@@ -30,6 +32,10 @@ public class photosLoginScreenController {
 		}
 		
 	}
-	
+
+	public void start() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

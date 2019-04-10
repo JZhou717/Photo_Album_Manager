@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 
-public class photosSearchScreenController {
+public class SearchController {
 	@FXML
 	public TextField tagToAdd;
 	@FXML

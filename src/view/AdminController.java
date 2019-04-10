@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 
-public class photosAdminScreenController {
+public class AdminController {
 	@FXML
 	public TextField usernameToDelete;
 	@FXML

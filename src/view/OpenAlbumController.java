@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 
-public class photosOpenAlbumScreenController {
+public class OpenAlbumController {
 	@FXML
 	public TextField tagToAddText;
 	

@@ -6,7 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 
-public class photosUserAlbumScreenController {
+public class UserAlbumController {
 	@FXML
 	public TextField newAlbumName;
 	@FXML
