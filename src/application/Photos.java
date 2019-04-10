@@ -18,13 +18,22 @@ public class Photos extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/Login.fxml"));
+			
+			//loader.setLocation(getClass().getResource("/view/Login.fxml"));
+			
+			loader.setLocation(getClass().getResource("/view/Admin.fxml"));
+			
 			AnchorPane root = loader.load();
 			Scene scene = new Scene(root);
 			
 			//Getting the controller for the login screen
+			/*
 			LoginController logController = loader.getController();
 			logController.start();
+			*/
+			
+			AdminController admController = loader.getController();
+			admController.start();
 			
 			loginStage.setScene(scene);
 			loginStage.setTitle("Photo Albums Application");

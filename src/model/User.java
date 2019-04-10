@@ -1,0 +1,36 @@
+package model;
+
+import java.io.Serializable;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
+/**
+ * This data structure represents a user
+ * @author Jake
+ *
+ */
+
+public class User implements Serializable{
+
+	/**
+	 * Default Serial Version UID
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Username
+	 */
+	private String username;
+	
+	/**
+	 * This user's albums. Observable list to show in UserAblum Listview
+	 */
+	private ObservableList<Album> myAlbums;
+	
+	public User(String name) {
+		this.username = name;
+		this.myAlbums = FXCollections.observableArrayList();
+	}
+	
+}
