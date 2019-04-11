@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 
 
 public class Photos extends Application {
@@ -19,21 +18,13 @@ public class Photos extends Application {
 			
 			FXMLLoader loader = new FXMLLoader();
 			
-			//loader.setLocation(getClass().getResource("/view/Login.fxml"));
-			
-			loader.setLocation(getClass().getResource("/view/Admin.fxml"));
+			loader.setLocation(getClass().getResource("/view/Login.fxml"));
 			
 			AnchorPane root = loader.load();
 			Scene scene = new Scene(root);
 			
 			//Getting the controller for the login screen
-			/*
 			LoginController logController = loader.getController();
-			logController.start();
-			*/
-			
-			AdminController admController = loader.getController();
-			admController.start();
 			
 			loginStage.setScene(scene);
 			loginStage.setTitle("Photo Albums Application");

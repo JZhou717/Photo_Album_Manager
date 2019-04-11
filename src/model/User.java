@@ -28,6 +28,10 @@ public class User implements Serializable{
 	 */
 	private ObservableList<Album> myAlbums;
 	
+	/**
+	 * Constructor for a new user
+	 * @param name The string username needed to create the user
+	 */
 	public User(String name) {
 		this.username = name;
 		this.myAlbums = FXCollections.observableArrayList();

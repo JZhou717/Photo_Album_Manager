@@ -43,10 +43,10 @@ fx:controller="view.AdminController">
             <TextField fx:id="usernameToAdd" layoutX="124.0" layoutY="102.0" />
          </children>
       </AnchorPane>
-      <!-- -      <Button onAction="#logoutClick" layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
+      <Button onAction="#logoutClick" layoutX="772.0" layoutY="519.0" mnemonicParsing="false" text="Logout">
          <font>
             <Font size="18.0" />
          </font>
-      </Button>  -->
+      </Button>
    </children>
 </AnchorPane>

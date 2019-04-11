@@ -18,10 +18,13 @@ public class UserAlbumController {
 	public void goToSearchClick() {
 		
 	}
+	public void createAlbumClick() {
+		
+	}
 	public void deleteAlbumClick() {
 		String name = albumInfo.getText();
 	}
-	public void editAlbumAlbumClick() {
+	public void editAlbumClick() {
 		String name = albumInfo.getText();
 	}
 	public void addAlbumClick() {
