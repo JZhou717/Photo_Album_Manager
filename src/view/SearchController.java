@@ -1,9 +1,16 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 
 public class SearchController {
@@ -16,8 +23,12 @@ public class SearchController {
 	@FXML
 	public TextField startDate;
 	
-	public void backClick() {
-		
+	public void backClick(ActionEvent event) throws Exception {
+		Parent userAlbumScreen;
+		userAlbumScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/UserAlbum.fxml"));
+		Scene newScene = new Scene(userAlbumScreen);
+		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		mainWindow.setScene(newScene);
 	}
 	public void deleteTagClick() {
 		
@@ -35,8 +46,13 @@ public class SearchController {
 	public void searchTagClick() {
 		String tag = tagToSearch.getText();
 	}
-	public void logoutClick() {
-		
+	public void logoutClick(ActionEvent event) throws Exception {
+		Parent loginScreen;
+		loginScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+		Scene newScene = new Scene(loginScreen);
+		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
+		mainWindow.setScene(newScene);
+
 	}
 	
 		
