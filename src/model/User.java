@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 /**
  * This data structure represents a user
@@ -61,7 +64,7 @@ public class User implements Serializable{
 			if(name.toLowerCase().equals(existing_name)) {
 				Alert alert = new Alert(AlertType.ERROR, "album name already in use", ButtonType.OK);
 				alert.show();
-				return;
+				return null;
 			}
 		}
 		//Did not find an album with the same name
