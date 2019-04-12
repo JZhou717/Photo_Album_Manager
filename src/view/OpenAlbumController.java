@@ -39,7 +39,8 @@ public class OpenAlbumController {
 		
 	}
 	public void backClick() {
-		
+		PhotosController.stage.setScene(PhotosController.user_album_scene);
+		PhotosController.stage.show();
 	}
 	
 	

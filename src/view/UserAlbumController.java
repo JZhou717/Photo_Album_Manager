@@ -1,6 +1,8 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import java.util.Optional;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,8 +11,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Admin;
@@ -23,6 +29,7 @@ public class UserAlbumController {
 	public TextField newAlbumName;
 	@FXML
 	public TextField albumInfo;
+	
 	@FXML
 	ListView<Album> listView;
 	
@@ -36,11 +43,8 @@ public class UserAlbumController {
 
 	}
 	public void goToSearchClick(ActionEvent event) throws Exception {
-		Parent searchScreen;
-		searchScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/Search.fxml"));
-		Scene newScene = new Scene(searchScreen);
-		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		mainWindow.setScene(newScene);
+		PhotosController.stage.setScene(PhotosController.search_scene);
+		PhotosController.stage.show();
 	}
 	public void createAlbumClick() {
 		String name = newAlbumName.getText();
@@ -53,21 +57,45 @@ public class UserAlbumController {
 	}
 	public void editAlbumClick() {
 		String name = albumInfo.getText();
-	}
-	public void addAlbumClick() {
-		String name = newAlbumName.getText();
+		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
+			Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);
+			alert.show();
+			return;
+		}
+		TextInputDialog tid = new TextInputDialog();
+		tid.setHeaderText("Enter new name for Album:");
+		tid.setContentText("New Name: ");
+		String result = tid.showAndWait().orElse(null);
+		if (result==null) {
+			return;
+		}
+		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name).rename(result);
+		int index = listView.getSelectionModel().getSelectedIndex();
+		obsList.set(index, PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumAt(index));
+		//update listview here
 	}
 	public void openAlbumClick() {
 		String name = albumInfo.getText();
+		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
+			Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);
+			alert.show();
+			return;
+		}else {
+			PhotosController.stage.setScene(PhotosController.open_album_scene);
+			PhotosController.stage.show();
+		}
+		
+		
 	}
 	public void init(Stage mainStage) {
 		
 		//Populating the list
-		//WORKING HERE
+		
 		obsList = PhotosController.admin.getUserByName(PhotosController.get_user()).populateAlbumList();
 		//obsList.add(new Album("TOM"));
 		listView.setItems(obsList);
 		
+		//listener
 		listView
 			.getSelectionModel()
 			.selectedIndexProperty()
@@ -76,7 +104,7 @@ public class UserAlbumController {
 					showItemInputDialog(mainStage));
 		listView.getSelectionModel().select(0);
 		
-		
+		albumInfo.setEditable(false);
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {

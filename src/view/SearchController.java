@@ -17,7 +17,8 @@ public class SearchController {
 	public TextField startDate;
 	
 	public void backClick(ActionEvent event) throws Exception {
-		
+		PhotosController.stage.setScene(PhotosController.user_album_scene);
+		PhotosController.stage.show();
 		/* UPDATE THIS TO THE NEW IMPLEMENTATION
 		Parent userAlbumScreen;
 		userAlbumScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/UserAlbum.fxml"));
