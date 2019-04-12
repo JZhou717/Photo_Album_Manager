@@ -24,9 +24,20 @@ public class Photo{
 		return this.caption;
 	}
 	public void addTag(String name, String value) {
-		
+		tags.add(new Tag(name, value));
 	}
-	
+	public void editCaption(String newCaption) {
+		caption = newCaption;
+	}
+	public Calendar getDate() {
+		return this.date;
+	}
+	public Image getImage() {
+		return this.image;
+	}
+	public ArrayList<Tag> getTags() {
+		return this.tags;
+	}
 		
 	
 }
