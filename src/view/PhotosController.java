@@ -33,8 +33,12 @@ public class PhotosController {
 	protected static LoginController login_controller;
 	protected static Scene admin_scene;
 	protected static AdminController admin_controller;
-	
-	//MORE SCENES
+	protected static Scene open_album_scene;
+	protected static OpenAlbumController open_album_controller;
+	protected static Scene user_album_scene;
+	protected static UserAlbumController user_album_controller;
+	protected static Scene search_scene;
+	protected static SearchController search_controller;
 	
 	public static Stage stage;
 	
@@ -56,6 +60,25 @@ public class PhotosController {
 			Parent admin_root = admin_loader.load();
 			admin_scene = new Scene(admin_root);
 			admin_controller = admin_loader.getController();
+			//load open_album_scene
+			FXMLLoader open_album_loader = new FXMLLoader();
+			open_album_loader.setLocation(PhotosController.class.getResource("/view/OpenAlbum.fxml"));
+			Parent open_album_root = open_album_loader.load();
+			open_album_scene = new Scene(open_album_root);
+			open_album_controller = open_album_loader.getController();
+			//load user_album_scene
+			FXMLLoader user_album_loader = new FXMLLoader();
+			user_album_loader.setLocation(PhotosController.class.getResource("/view/UserAlbum.fxml"));
+			Parent user_album_root = user_album_loader.load();
+			user_album_scene = new Scene(user_album_root);
+			user_album_controller = user_album_loader.getController();
+			//load search_scene
+			FXMLLoader search_loader = new FXMLLoader();
+			search_loader.setLocation(PhotosController.class.getResource("/view/Search.fxml"));
+			Parent search_root = search_loader.load();
+			search_scene = new Scene(search_root);
+			search_controller = search_loader.getController();
+			
 			//set the stage
 			primaryStage.setTitle("Photo Albums Manager");
 			primaryStage.setResizable(false);
@@ -73,7 +96,7 @@ public class PhotosController {
 	}
 	
 	public static void serialize() {
-		
+		Admin.serialize();
 	}
 	
 }

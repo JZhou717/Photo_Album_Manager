@@ -116,4 +116,11 @@ public class Admin implements Serializable{
 		user_list = FXCollections.observableArrayList();
 		user_list.add(new User("admin"));
 	}
+	
+	/**
+	 * Serialize the data stored in admin
+	 */
+	public static void serialize() {
+		
+	}
 }
