@@ -3,8 +3,15 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import model.Admin;
 
 
 public class LoginController {
@@ -27,7 +34,7 @@ public class LoginController {
 		else if (name.equals("stock")) {
 
 
-		}else if( true) {//Admin.user_exists(name)) {
+		}else if(PhotosController.admin.user_exists(name)) {
 			
 			/*
 			Parent UserAlbumScreen;
@@ -36,6 +43,9 @@ public class LoginController {
 			Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 			mainWindow.setScene(newScene);
 			*/
+			PhotosController.stage.setScene(PhotosController.user_album_scene);
+			//PhotosController.user_album_controller.init(PhotosController.stage);
+			PhotosController.stage.show();
 			
 			
 
