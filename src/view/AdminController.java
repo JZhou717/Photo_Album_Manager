@@ -79,17 +79,9 @@ public class AdminController {
 	 * @param mainStage the Stage to display to
 	 */
 	public void init(Stage mainStage) {
-		
-		if(listView == null) {
-			Alert alert = new Alert(AlertType.ERROR, "listView is null", ButtonType.OK);
-			alert.show();
-		}
 	
 		//Populating the list
 		obsList = Admin.populateUserList();
-		
-		obsList.add(0, new User("admin"));
-		
 		listView.setItems(obsList);
 		
 		listView

@@ -24,7 +24,7 @@ public class Admin implements Serializable{
 	/**
 	 * The list of users in the system
 	 */
-	private static ObservableList<User> user_list = FXCollections.observableArrayList();
+	private static ObservableList<User> user_list;
 	
 	public static ObservableList<User> populateUserList() {
 		return user_list;
@@ -78,8 +78,6 @@ public class Admin implements Serializable{
 		String existing_name;
 		
 		//No users in system
-		//SHOULD CHANGE TO 1 SINCE ADMIN WILL ALWAYS BE IN
-		//NOT SURE IF WE HAVE ADDED ADMIN INTO THE LIST YET
 		if(user_list.size() == 0) {
 			Alert alert = new Alert(AlertType.ERROR, "List empty. User does not exist", ButtonType.OK);
 			alert.show();
@@ -109,5 +107,13 @@ public class Admin implements Serializable{
 	 */
 	public static User getUser(int index) {
 		return user_list.get(index);
+	}
+	
+	/**
+	 * Initializes the Admin Model to have a new observableArrayList and add admin and stock in it
+	 */
+	public static void start() {
+		user_list = FXCollections.observableArrayList();
+		user_list.add(new User("admin"));
 	}
 }
