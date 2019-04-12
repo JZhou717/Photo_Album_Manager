@@ -3,11 +3,12 @@ package application;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.PhotosController;
-import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 
 public class Photos extends Application {
+	/**
+	 * Bootup on start
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -20,5 +21,13 @@ public class Photos extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	/**
+	 * Serialize data on stop
+	 */
+	@Override
+	public void stop() {
+		PhotosController.serialize();
 	}
 }

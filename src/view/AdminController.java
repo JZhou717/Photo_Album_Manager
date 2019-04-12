@@ -5,18 +5,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Admin;
 import model.User;
 
 /**
@@ -39,7 +33,7 @@ public class AdminController {
 		String name = usernameToAdd.getText().trim();
 		
 		
-		if(Admin.user_exists(name)) {
+		if(PhotosController.admin.user_exists(name)) {
 			//username already taken
 			Alert alert = new Alert(AlertType.ERROR, "Username already taken", ButtonType.OK);
 			alert.show();
@@ -47,7 +41,7 @@ public class AdminController {
 		}
 		else {
 			//adding user
-			Admin.add_user(name);
+			PhotosController.admin.add_user(name);
 		}
 	}
 	
@@ -62,7 +56,7 @@ public class AdminController {
 			return;
 		}
 		else {
-			Admin.remove_user(name);
+			PhotosController.admin.remove_user(name);
 		}
 	}
 	
@@ -81,7 +75,7 @@ public class AdminController {
 	public void init(Stage mainStage) {
 	
 		//Populating the list
-		obsList = Admin.populateUserList();
+		obsList = PhotosController.admin.populateUserList();
 		listView.setItems(obsList);
 		
 		listView
@@ -99,7 +93,7 @@ public class AdminController {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index > -1) {
-			User user = Admin.getUser(index);
+			User user = PhotosController.admin.getUser(index);
 			usernameToDelete.setText(user.getName());
 		}
 	}

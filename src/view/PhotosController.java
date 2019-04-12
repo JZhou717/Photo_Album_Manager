@@ -1,23 +1,14 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.Admin;
-import model.User;
 
 /**
  * The main controller for this application
@@ -40,13 +31,26 @@ public class PhotosController {
 	protected static Scene search_scene;
 	protected static SearchController search_controller;
 	
+	/**
+	 * The stage that we will be displaying everything on
+	 */
 	public static Stage stage;
+	
+	/**
+	 * The name of the current user
+	 */
+	private static String current_user;
+	
+	/**
+	 * Instances of the models we'll need
+	 */
+	protected static Admin admin;
 	
 	public static void start(Stage primaryStage) {
 		try {
 			
-			//start up Admin
-			Admin.start();
+			//grab a model of the admin
+			admin = new Admin();
 			
 			//load login_scene
 			FXMLLoader login_loader = new FXMLLoader();
@@ -95,8 +99,30 @@ public class PhotosController {
 		
 	}
 	
+	/**
+	 * Sets the current user
+	 * @param name String name of the user to set to
+	 */
+	public static void set_user(String name) {
+		if(admin.user_exists(name)) {
+			current_user = name;
+		}
+		else {
+			Alert alert = new Alert(AlertType.ERROR, "Setting to nonexistent user", ButtonType.OK);
+			alert.show();
+			return;
+		}
+	}
+	
+	/**
+	 * Retrieves the current user
+	 */
+	public static String get_user() {
+		return current_user;
+	}
+	
 	public static void serialize() {
-		Admin.serialize();
+		admin.serialize();
 	}
 	
 }

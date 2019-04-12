@@ -24,10 +24,18 @@ public class Admin implements Serializable{
 	/**
 	 * The list of users in the system
 	 */
-	private static ObservableList<User> user_list;
+	private ObservableList<User> user_list;
 	
-	public static ObservableList<User> populateUserList() {
+	public ObservableList<User> populateUserList() {
 		return user_list;
+	}
+	
+	/**
+	 * Creates a new Admin instance
+	 */
+	public Admin() {
+		user_list = FXCollections.observableArrayList();
+		user_list.add(new User("admin"));
 	}
 	
 	/**
@@ -35,7 +43,7 @@ public class Admin implements Serializable{
 	 * @param n String of the name of the user we're trying to add
 	 * @return true if the username is already in the list (case insensitive), false if not
 	 */
-	public static boolean user_exists(String n) {
+	public boolean user_exists(String n) {
 		//Name of the user to add
 		String name = n.toLowerCase();
 		//Temp String to hold name of a user already in the list
@@ -55,7 +63,7 @@ public class Admin implements Serializable{
 	 * Adds a user to the list
 	 * @param n String of the name of the user
 	 */
-	public static void add_user(String n) {
+	public void add_user(String n) {
 		// TODO Auto-generated method stub
 		User new_user = new User(n);
 		user_list.add(new_user);
@@ -65,7 +73,7 @@ public class Admin implements Serializable{
 	 * removes a user from the list
 	 * @param n String of the name of the user to remove
 	 */
-	public static void remove_user(String n) {
+	public void remove_user(String n) {
 		
 		String name = n.toLowerCase();
 		if(n.equals("admin")) {
@@ -105,22 +113,16 @@ public class Admin implements Serializable{
 	 * @param index int value of the index of the user
 	 * @return User at the index
 	 */
-	public static User getUser(int index) {
+	public User getUser(int index) {
 		return user_list.get(index);
 	}
 	
-	/**
-	 * Initializes the Admin Model to have a new observableArrayList and add admin and stock in it
-	 */
-	public static void start() {
-		user_list = FXCollections.observableArrayList();
-		user_list.add(new User("admin"));
-	}
 	
 	/**
 	 * Serialize the data stored in admin
 	 */
-	public static void serialize() {
-		
+	public void serialize() {
+		Alert alert = new Alert(AlertType.INFORMATION, "ADMIN SERIALIZING!!!", ButtonType.OK);
+		alert.show();
 	}
 }
