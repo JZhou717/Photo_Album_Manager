@@ -1,6 +1,7 @@
 package model;
 
-import java.io.Serializable;
+
+import javafx.collections.ObservableList;
 
 
 /**
@@ -9,11 +10,8 @@ import java.io.Serializable;
  *
  */
 
-public class Album implements Serializable{
-
-	/**
-	 * Default Serial Version ID 
-	 */
-	private static final long serialVersionUID = 1L;	
+public class Album{
+	private ObservableList<Photo> myPhotos;
+		
 	
 }
