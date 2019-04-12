@@ -11,7 +11,24 @@ import javafx.collections.ObservableList;
  */
 
 public class Album{
+	private String name;
 	private ObservableList<Photo> myPhotos;
-		
-	
+	public Album(String name) {
+		this.name = name;
+	}
+	public String getName() {
+		return this.name;
+	}
+	public void rename(String rename) {
+		this.name = rename;
+	}
+	public ObservableList<Photo> getPhoto(){
+		return this.myPhotos;
+	}
+	public void addPhoto(Photo newPhoto){
+		myPhotos.add(newPhoto);
+	}
+	public void deletePhoto(Photo unwanted) {
+		myPhotos.remove(unwanted);
+	}
 }
