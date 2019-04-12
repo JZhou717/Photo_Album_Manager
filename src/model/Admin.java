@@ -54,7 +54,7 @@ public class Admin implements Serializable{
 	 */
 	public Admin() {
 		if(user_list == null) {
-			System.out.println("user_list not read properly from serialization");
+			//System.out.println("user_list not read properly from serialization");
 			user_list = FXCollections.observableArrayList();
 			user_list.add(new User("admin"));
 		}
@@ -168,6 +168,10 @@ public class Admin implements Serializable{
 		
 	}
 	
+	public ArrayList<User> get_saved_list() {
+		return serializable_user_list;
+	}
+	
 	/*
 	 * Reads the serialized data back into the program
 	 * @throws IOException if something is wrong with the file we are trying to access
@@ -175,21 +179,26 @@ public class Admin implements Serializable{
 	 */
 	public static Admin retrieve_serialized_data() throws IOException, ClassNotFoundException{
 		
-		Admin ret;
+		Admin ret = new Admin();
 		
 		try {
 			ObjectInputStream ois = new ObjectInputStream(
 				new FileInputStream(PhotosController.storeDir + File.separator + storeFile));
-			ret = (Admin) ois.readObject();
 			
-			//user_list = FXCollections.observableArrayList(serializable_user_list);
+			Admin serialized_admin = (Admin) ois.readObject();
+
+			ArrayList<User> serializable_user_list = serialized_admin.get_saved_list();
+			ret.user_list = FXCollections.observableArrayList(serializable_user_list);
 			
+			ois.close();
 			return ret;
+			
 		}
 		catch(EOFException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
-		return null;
+		ret.add_user("stock");
+		return ret;
 	}
 	
 	/**
@@ -199,6 +208,7 @@ public class Admin implements Serializable{
 	public void serialize() throws IOException{
 		
 		serializable_user_list = new ArrayList<User>(user_list);
+		//System.out.println("Serializing list size" + serializable_user_list.size());
 		
 		ObjectOutputStream oos = new ObjectOutputStream(
 			new FileOutputStream(PhotosController.storeDir + File.separator + storeFile));

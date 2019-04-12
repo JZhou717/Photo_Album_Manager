@@ -31,10 +31,7 @@ public class LoginController {
 			PhotosController.stage.show();
 			
 		}
-		else if (name.equals("stock")) {
-
-
-		}else if(PhotosController.admin.user_exists(name)) {
+		else if(PhotosController.admin.user_exists(name)) {
 			
 			/*
 			Parent UserAlbumScreen;

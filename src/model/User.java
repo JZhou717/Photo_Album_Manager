@@ -29,7 +29,7 @@ public class User implements Serializable{
 	/**
 	 * This user's albums. Observable list to show in UserAblum Listview
 	 */
-	private ObservableList<Album> myAlbums;
+	private transient ObservableList<Album> myAlbums;
 	
 	/**
 	 * Constructor for a new user

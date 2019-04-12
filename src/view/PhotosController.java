@@ -61,9 +61,6 @@ public class PhotosController {
 			
 			retrieve_serialized_data();
 			
-			//grab a model of the admin
-			//admin = new Admin();
-			
 			//load login_scene
 			FXMLLoader login_loader = new FXMLLoader();
 			login_loader.setLocation(PhotosController.class.getResource("/view/Login.fxml"));
@@ -140,9 +137,8 @@ public class PhotosController {
 	public static void retrieve_serialized_data() throws IOException, ClassNotFoundException{
 		admin = (Admin) Admin.retrieve_serialized_data();
 		if(admin == null) {
-			//Alert alert = new Alert(AlertType.ERROR, "CREATING A NEW ADMIN, DATA NOT SERIALIZED", ButtonType.OK);
-			//alert.show();
-			admin = new Admin();
+			Alert alert = new Alert(AlertType.ERROR, "Admin.retrieve_serialized_data did not execute properly.", ButtonType.OK);
+			alert.show();
 		}
 	}
 	
