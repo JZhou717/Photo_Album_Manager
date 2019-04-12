@@ -33,4 +33,7 @@ public class Album implements Serializable{
 	public void deletePhoto(Photo unwanted) {
 		myPhotos.remove(unwanted);
 	}
+	public String toString() {
+		return this.name;
+	}
 }

@@ -43,11 +43,13 @@ public class UserAlbumController {
 		mainWindow.setScene(newScene);
 	}
 	public void createAlbumClick() {
-		String name = albumInfo.getText();
-		Album newAlbum = new Album(name);
+		String name = newAlbumName.getText();
+		PhotosController.admin.getUserByName(PhotosController.get_user()).addAlbum(name);
 	}
 	public void deleteAlbumClick() {
 		String name = albumInfo.getText();
+		PhotosController.admin.getUserByName(PhotosController.get_user()).removeAlbum(name);
+		
 	}
 	public void editAlbumClick() {
 		String name = albumInfo.getText();
@@ -63,6 +65,7 @@ public class UserAlbumController {
 		//Populating the list
 		//WORKING HERE
 		obsList = PhotosController.admin.getUserByName(PhotosController.get_user()).populateAlbumList();
+		//obsList.add(new Album("TOM"));
 		listView.setItems(obsList);
 		
 		listView
@@ -77,14 +80,14 @@ public class UserAlbumController {
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {
-		/*
+		
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index > -1) {
-			User user = PhotosController.admin.getUser(index);
-			usernameToDelete.setText(user.getName());
+			Album album = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumAt(index);
+			albumInfo.setText(album.getName());
 		}
-		*/
+		
 	}
 	
 	

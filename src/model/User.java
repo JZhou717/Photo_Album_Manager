@@ -76,6 +76,28 @@ public class User implements Serializable{
 		
 		
 	}
+	public void removeAlbum(String name) {
+		name.toLowerCase();
+		String existingName;
+		if (myAlbums.size()==0) {
+			Alert alert = new Alert(AlertType.ERROR, "List empty. Album does not exist", ButtonType.OK);
+			alert.show();
+			return;
+		}
+		for (int i=0;i<myAlbums.size();i++) {
+			existingName = myAlbums.get(i).getName().toLowerCase();
+			if (name.equals(existingName)) {
+				myAlbums.remove(i);
+				return;
+			}
+		}
+		Alert alert = new Alert(AlertType.ERROR, "Abum does not exist", ButtonType.OK);
+		alert.show();
+		return;
+	}
+	public Album getAlbumAt(int i) {
+		return myAlbums.get(i);
+	}
 	public ObservableList<Album> populateAlbumList() {
 		return myAlbums;
 	}
