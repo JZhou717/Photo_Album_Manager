@@ -1,6 +1,7 @@
 package model;
 
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import javafx.scene.image.Image;
@@ -12,7 +13,7 @@ import javafx.scene.image.Image;
  *
  */
 
-public class Photo{
+public class Photo implements Serializable{
 	
 	private String caption;
 	private ArrayList<Tag> tags;

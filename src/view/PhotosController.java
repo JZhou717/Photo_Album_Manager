@@ -12,6 +12,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import model.Admin;
+import model.User;
 
 /**
  * The main controller for this application
@@ -42,7 +43,7 @@ public class PhotosController {
 	/**
 	 * The name of the current user
 	 */
-	private transient static String current_user;
+	private transient static User current_user;
 	
 	/**
 	 * Instances of the models we'll need

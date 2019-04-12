@@ -1,6 +1,8 @@
 package model;
 
 
+import java.io.Serializable;
+
 import javafx.collections.ObservableList;
 
 
@@ -10,7 +12,7 @@ import javafx.collections.ObservableList;
  *
  */
 
-public class Album{
+public class Album implements Serializable{
 	private String name;
 	private ObservableList<Photo> myPhotos;
 	public Album(String name) {

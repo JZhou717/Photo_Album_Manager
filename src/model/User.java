@@ -53,7 +53,9 @@ public class User implements Serializable{
 		return this.username;
 	}
 	
-	
+	public ObservableList<Album> getAlbums(){
+		return this.myAlbums;
+	}
 	public Album addAlbum(String n) {
 		String name = n.trim();
 		String existing_name;

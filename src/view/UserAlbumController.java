@@ -1,15 +1,20 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Album;
+import model.User;
 
 
 public class UserAlbumController {
@@ -17,6 +22,11 @@ public class UserAlbumController {
 	public TextField newAlbumName;
 	@FXML
 	public TextField albumInfo;
+	@FXML
+	ListView<User> listView;
+	
+	//observable list of albums
+	private ObservableList<User> obsList = FXCollections.observableArrayList();
 	
 	public void logoutClick(ActionEvent event) throws Exception {
 		
@@ -32,7 +42,8 @@ public class UserAlbumController {
 		mainWindow.setScene(newScene);
 	}
 	public void createAlbumClick() {
-		
+		String name = albumInfo.getText();
+		Album newAlbum = new Album(name);
 	}
 	public void deleteAlbumClick() {
 		String name = albumInfo.getText();
@@ -45,6 +56,32 @@ public class UserAlbumController {
 	}
 	public void openAlbumClick() {
 		String name = albumInfo.getText();
+	}
+	public void init(Stage mainStage) {
+		
+		//Populating the list
+		//WORKING HERE
+		obsList = PhotosController.get_user().getAlbums().populateUserList();
+		listView.setItems(obsList);
+		
+		listView
+			.getSelectionModel()
+			.selectedIndexProperty()
+			.addListener(
+				(obs, oldVal, newVal) ->
+					showItemInputDialog(mainStage));
+		listView.getSelectionModel().select(0);
+		
+	}
+	
+	private void showItemInputDialog(Stage mainStage) {
+		
+		int index = listView.getSelectionModel().getSelectedIndex();
+		
+		if(index > -1) {
+			User user = PhotosController.admin.getUser(index);
+			usernameToDelete.setText(user.getName());
+		}
 	}
 	
 }
