@@ -76,4 +76,8 @@ public class User implements Serializable{
 		
 		
 	}
+	public ObservableList<Album> populateAlbumList() {
+	
+		return myAlbums;
+	}
 }

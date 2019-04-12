@@ -43,8 +43,9 @@ public class LoginController {
 			Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 			mainWindow.setScene(newScene);
 			*/
+			PhotosController.set_user(name);
 			PhotosController.stage.setScene(PhotosController.user_album_scene);
-			//PhotosController.user_album_controller.init(PhotosController.stage);
+			PhotosController.user_album_controller.init(PhotosController.stage);
 			PhotosController.stage.show();
 			
 			

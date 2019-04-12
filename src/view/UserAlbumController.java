@@ -13,6 +13,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import model.Admin;
 import model.Album;
 import model.User;
 
@@ -23,10 +24,10 @@ public class UserAlbumController {
 	@FXML
 	public TextField albumInfo;
 	@FXML
-	ListView<User> listView;
+	ListView<Album> listView;
 	
 	//observable list of albums
-	private ObservableList<User> obsList = FXCollections.observableArrayList();
+	private ObservableList<Album> obsList = FXCollections.observableArrayList();
 	
 	public void logoutClick(ActionEvent event) throws Exception {
 		
@@ -61,7 +62,7 @@ public class UserAlbumController {
 		
 		//Populating the list
 		//WORKING HERE
-		obsList = PhotosController.get_user().getAlbums().populateUserList();
+		obsList = PhotosController.admin.getUserByName(PhotosController.get_user()).populateAlbumList();
 		listView.setItems(obsList);
 		
 		listView
@@ -72,16 +73,19 @@ public class UserAlbumController {
 					showItemInputDialog(mainStage));
 		listView.getSelectionModel().select(0);
 		
+		
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {
-		
+		/*
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index > -1) {
 			User user = PhotosController.admin.getUser(index);
 			usernameToDelete.setText(user.getName());
 		}
+		*/
 	}
+	
 	
 }

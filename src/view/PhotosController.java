@@ -43,7 +43,8 @@ public class PhotosController {
 	/**
 	 * The name of the current user
 	 */
-	private transient static User current_user;
+	private transient static String current_user;
+	
 	
 	/**
 	 * Instances of the models we'll need
