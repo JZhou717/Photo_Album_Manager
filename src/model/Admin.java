@@ -141,6 +141,35 @@ public class Admin implements Serializable{
 		return user_list.get(index);
 	}
 	
+	public User getUserByName(String n) {
+		
+		String name = n.toLowerCase().trim();
+		String existing_name;
+		
+		User ret;
+		
+		if(user_list.size() == 0) {
+			Alert alert = new Alert(AlertType.ERROR, "List empty. User does not exist", ButtonType.OK);
+			alert.show();
+			return null;
+		}
+		else {
+			for(int i = 0; i < user_list.size(); i++) {
+				existing_name = user_list.get(i).getName().toLowerCase().trim();
+				if(name.equals(existing_name)) {
+					ret = user_list.get(i);
+					return ret;
+				}
+			}
+		}
+		//Could not find the user in the list
+		Alert alert = new Alert(AlertType.ERROR, "User does not exist", ButtonType.OK);
+		alert.show();
+		return null;
+		
+		
+	}
+	
 	/*
 	 * Reads the serialized data back into the program
 	 * @throws IOException if something is wrong with the file we are trying to access
