@@ -18,11 +18,9 @@ public class OpenAlbumController {
 	
 	
 	public void logoutClick(ActionEvent event) throws Exception {
-		Parent loginScreen;
-		loginScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-		Scene newScene = new Scene(loginScreen);
-		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		mainWindow.setScene(newScene);
+		
+		PhotosController.stage.setScene(PhotosController.login_scene);
+		PhotosController.stage.show();
 
 	}
 	public void deletePhotoClick() {

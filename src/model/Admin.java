@@ -90,6 +90,7 @@ public class Admin implements Serializable{
 				existing_name = user_list.get(i).getName().toLowerCase();
 				if(name.equals(existing_name)) {
 					user_list.remove(i);
+					return;
 				}
 			}
 			//Went through the whole list without finding the user

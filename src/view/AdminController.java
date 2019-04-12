@@ -67,11 +67,9 @@ public class AdminController {
 	}
 	
 	public void logoutClick(ActionEvent event) throws Exception {
-		Parent loginScreen;
-		loginScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-		Scene newScene = new Scene(loginScreen);
-		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		mainWindow.setScene(newScene);
+		
+		PhotosController.stage.setScene(PhotosController.login_scene);
+		PhotosController.stage.show();
 
 	}
 	
@@ -86,20 +84,14 @@ public class AdminController {
 			Alert alert = new Alert(AlertType.ERROR, "listView is null", ButtonType.OK);
 			alert.show();
 		}
-		
-		// Testing with a fake user
+	
+		//Populating the list
 		obsList = Admin.populateUserList();
 		
-		obsList.add(new User("BACON"));
-		
-		for(int i = 0; i < obsList.size(); i++) {
-			User user = obsList.get(i);
-			System.out.println(user.getName());
-		}
+		obsList.add(0, new User("admin"));
 		
 		listView.setItems(obsList);
 		
-		//Need to add a listener
 		listView
 			.getSelectionModel()
 			.selectedIndexProperty()
@@ -111,9 +103,8 @@ public class AdminController {
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {
+		
 		int index = listView.getSelectionModel().getSelectedIndex();
-		
-		
 		
 		if(index > -1) {
 			User user = Admin.getUser(index);

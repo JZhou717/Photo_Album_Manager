@@ -23,11 +23,15 @@ public class SearchController {
 	public TextField startDate;
 	
 	public void backClick(ActionEvent event) throws Exception {
+		
+		/* UPDATE THIS TO THE NEW IMPLEMENTATION
 		Parent userAlbumScreen;
 		userAlbumScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/UserAlbum.fxml"));
 		Scene newScene = new Scene(userAlbumScreen);
 		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		mainWindow.setScene(newScene);
+		*/
+		
 	}
 	public void deleteTagClick() {
 		
@@ -46,11 +50,9 @@ public class SearchController {
 		String tag = tagToSearch.getText();
 	}
 	public void logoutClick(ActionEvent event) throws Exception {
-		Parent loginScreen;
-		loginScreen = (AnchorPane) FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-		Scene newScene = new Scene(loginScreen);
-		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
-		mainWindow.setScene(newScene);
+		
+		PhotosController.stage.setScene(PhotosController.login_scene);
+		PhotosController.stage.show();
 
 	}
 	
