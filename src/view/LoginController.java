@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import model.Admin;
 
 
 public class LoginController {
@@ -19,27 +20,33 @@ public class LoginController {
 	@FXML
 	public Text setText;
 	
+	private AdminController admin_controller = new AdminController();
+	
 	public void loginClick(ActionEvent event) throws Exception{
 
-		String name = username.getText();
+		String name = username.getText().trim();
+		
 		if (name.equals("admin")) {
-
-			Parent adminScreen;
-			adminScreen = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/Admin.fxml"));
-			Scene newScene = new Scene(adminScreen);
-			Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
-			mainWindow.setScene(newScene);
-
+			
+			PhotosController.stage.setScene(PhotosController.admin_scene);
+			PhotosController.admin_controller.init(PhotosController.stage);
+			PhotosController.stage.show();
+			
 		}
 		else if (name.equals("stock")) {
 
 
-		}else if(true) { // CHECK HERE TO MAKE SURE USERNAME EXISTS 
+		}else if( true) {//Admin.user_exists(name)) {
+			
+			/*
 			Parent UserAlbumScreen;
-			UserAlbumScreen = (AnchorPane)FXMLLoader.load(getClass().getResource("/view/UserAlbum.fxml"));
+			UserAlbumScreen = FXMLLoader.load(getClass().getResource("/view/UserAlbum.fxml"));
 			Scene newScene = new Scene(UserAlbumScreen);
 			Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 			mainWindow.setScene(newScene);
+			*/
+			
+			
 
 		}
 		//check in a loaded list of valid usernames
@@ -47,7 +54,7 @@ public class LoginController {
 			setText.setText("Username does not exist");
 
 		}
-
+		
 
 	}
 	

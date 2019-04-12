@@ -37,4 +37,17 @@ public class User implements Serializable{
 		this.myAlbums = FXCollections.observableArrayList();
 	}
 	
+	/**
+	 * Gets the name of the user
+	 * @return String of the username
+	 */
+	public String getName() {
+		return this.username;
+	}
+	
+	@Override
+	public String toString() {
+		return this.username;
+	}
+	
 }
