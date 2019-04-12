@@ -50,4 +50,25 @@ public class User implements Serializable{
 		return this.username;
 	}
 	
+	
+	public Album addAlbum(String n) {
+		String name = n.trim();
+		String existing_name;
+		
+		//Searching to see if this album name already exists for this user
+		for(int i = 0; i < myAlbums.size(); i++) {
+			existing_name = myAlbums.get(i).getName().toLowerCase();
+			if(name.toLowerCase().equals(existing_name)) {
+				Alert alert = new Alert(AlertType.ERROR, "album name already in use", ButtonType.OK);
+				alert.show();
+				return;
+			}
+		}
+		//Did not find an album with the same name
+		Album new_album = new Album(name);
+		myAlbums.add(new_album);
+		return new_album;
+		
+		
+	}
 }
