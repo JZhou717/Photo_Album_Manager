@@ -1,5 +1,7 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import view.PhotosController;
@@ -25,9 +27,10 @@ public class Photos extends Application {
 	
 	/**
 	 * Serialize data on stop
+	 * @throws IOException if something went wrong in serializing
 	 */
 	@Override
-	public void stop() {
+	public void stop() throws IOException{
 		PhotosController.serialize();
 	}
 }

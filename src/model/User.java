@@ -17,9 +17,9 @@ import javafx.scene.control.ButtonType;
 public class User implements Serializable{
 
 	/**
-	 * Default Serial Version UID
+	 * Generated Serial Version UID
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 4206077079088077119L;
 	
 	/**
 	 * Username

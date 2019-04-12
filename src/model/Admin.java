@@ -1,12 +1,23 @@
 package model;
 
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import view.PhotosController;
 
 /**
  * This data structure holds the list of Users in the system
@@ -17,14 +28,24 @@ import javafx.scene.control.ButtonType;
 public class Admin implements Serializable{
 
 	/**
-	 * Default Serial Version ID 
+	 * Generated Serial Version ID
 	 */
-	private static final long serialVersionUID = 1L;	
+	private static final long serialVersionUID = -3044287036009027432L;
 	
 	/**
 	 * The list of users in the system
 	 */
-	private ObservableList<User> user_list;
+	private transient ObservableList<User> user_list;
+	
+	/**
+	 * ArrayList that is only used when the program is opened or closed
+	 */
+	private ArrayList<User> serializable_user_list;
+	
+	/**
+	 * The file we are serializing to
+	 */
+	public static final String storeFile = "Admin.dat";
 	
 	public ObservableList<User> populateUserList() {
 		return user_list;
@@ -34,8 +55,11 @@ public class Admin implements Serializable{
 	 * Creates a new Admin instance
 	 */
 	public Admin() {
-		user_list = FXCollections.observableArrayList();
-		user_list.add(new User("admin"));
+		if(user_list == null) {
+			System.out.println("user_list not read properly from serialization");
+			user_list = FXCollections.observableArrayList();
+			user_list.add(new User("admin"));
+		}
 	}
 	
 	/**
@@ -117,12 +141,41 @@ public class Admin implements Serializable{
 		return user_list.get(index);
 	}
 	
+	/*
+	 * Reads the serialized data back into the program
+	 * @throws IOException if something is wrong with the file we are trying to access
+	 * @throws ClassNotFoundExceptin if something is wrong with a model we are trying to read
+	 */
+	public static Admin retrieve_serialized_data() throws IOException, ClassNotFoundException{
+		
+		Admin ret;
+		
+		try {
+			ObjectInputStream ois = new ObjectInputStream(
+				new FileInputStream(PhotosController.storeDir + File.separator + storeFile));
+			ret = (Admin) ois.readObject();
+			
+			//user_list = FXCollections.observableArrayList(serializable_user_list);
+			
+			return ret;
+		}
+		catch(EOFException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 	/**
 	 * Serialize the data stored in admin
+	 * @throws IOException if something goes wrong with serializing
 	 */
-	public void serialize() {
-		Alert alert = new Alert(AlertType.INFORMATION, "ADMIN SERIALIZING!!!", ButtonType.OK);
-		alert.show();
+	public void serialize() throws IOException{
+		
+		serializable_user_list = new ArrayList<User>(user_list);
+		
+		ObjectOutputStream oos = new ObjectOutputStream(
+			new FileOutputStream(PhotosController.storeDir + File.separator + storeFile));
+		oos.writeObject(this);
+		oos.close();
 	}
 }

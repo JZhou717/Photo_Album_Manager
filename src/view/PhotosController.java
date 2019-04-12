@@ -1,6 +1,9 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import java.io.File;
+import java.io.IOException;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -39,18 +42,25 @@ public class PhotosController {
 	/**
 	 * The name of the current user
 	 */
-	private static String current_user;
+	private transient static String current_user;
 	
 	/**
 	 * Instances of the models we'll need
 	 */
 	protected static Admin admin;
 	
+	/**
+	 * The directory we are serialiazing to
+	 */
+	public static final String storeDir = "dat";
+	
 	public static void start(Stage primaryStage) {
 		try {
 			
+			retrieve_serialized_data();
+			
 			//grab a model of the admin
-			admin = new Admin();
+			//admin = new Admin();
 			
 			//load login_scene
 			FXMLLoader login_loader = new FXMLLoader();
@@ -121,7 +131,24 @@ public class PhotosController {
 		return current_user;
 	}
 	
-	public static void serialize() {
+	/*
+	 * Reads the serialized data back into the program
+	 * @throws IOException if something is wrong with the file we are trying to access
+	 */
+	public static void retrieve_serialized_data() throws IOException, ClassNotFoundException{
+		admin = (Admin) Admin.retrieve_serialized_data();
+		if(admin == null) {
+			//Alert alert = new Alert(AlertType.ERROR, "CREATING A NEW ADMIN, DATA NOT SERIALIZED", ButtonType.OK);
+			//alert.show();
+			admin = new Admin();
+		}
+	}
+	
+	/**
+	 * Serializes all the models in the app
+	 * @throws IOException if something goes wrong in the serialization
+	 */
+	public static void serialize() throws IOException {
 		admin.serialize();
 	}
 	
