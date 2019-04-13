@@ -9,28 +9,28 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1076.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
+<AnchorPane prefHeight="733.0" prefWidth="1091.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchController">
    <children>
-      <AnchorPane layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1084.0">
+      <AnchorPane layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="1084.0">
          <children>
             <AnchorPane layoutX="23.0" layoutY="14.0" prefHeight="328.0" prefWidth="324.0" style="-fx-border-color: #000000;">
                <children>
-                  <Text layoutX="85.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result Photos">
+                  <Text layoutX="105.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Result Photos">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="302.0" fitWidth="295.0" layoutX="15.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" />
+                  <ListView fx:id="listView" prefHeight="250.0" prefWidth="295.0" layoutX="15.0" layoutY ="63.0" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutX="402.0" layoutY="14.0" prefHeight="535.0" prefWidth="622.0" style="-fx-border-color: #000000;">
+            <AnchorPane layoutX="402.0" layoutY="14.0" prefHeight="638.0" prefWidth="622.0" style="-fx-border-color: #000000;">
                <children>
                   <Text layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="152.99999779462814" />
-                  <ImageView fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
-                  <Text layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="152.99999779462814" />
+                  <ImageView fx:id="imageView" fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+                  <Text layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="153" />
                   <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
                   <ListView layoutX="71.0" layoutY="420.0" prefHeight="107.0" prefWidth="200.0" />
-                  <Text layoutX="71.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />
+                  <Text layoutX="71.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="153" />
                   <Button onAction="#deleteTagClick" layoutX="281.0" layoutY="420.0" mnemonicParsing="false" text="Delete Selected Tag" />
                   <Button onAction="#addTagClick" layoutX="337.0" layoutY="496.0" mnemonicParsing="false" text="Add Tag" />
                   <TextField fx:id="tagToAdd" layoutX="281.0" layoutY="458.0" promptText="Type, Value" />
@@ -65,10 +65,15 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tagToSearch" layoutX="14.0" layoutY="53.0"  />
+                  <TextField fx:id="tagToSearch" layoutX="14.0" layoutY="53.0" promptText="Type, Value" />
                   <Button onAction="#searchTagClick" layoutX="224.0" layoutY="63.0" mnemonicParsing="false" text="Search" />
                </children>
             </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
+      </AnchorPane>
          </children>
       </AnchorPane>
    </children>
