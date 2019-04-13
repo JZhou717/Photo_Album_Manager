@@ -2,12 +2,15 @@
 package view;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Optional;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -41,18 +44,45 @@ public class OpenAlbumController {
 	public void deletePhotoClick() {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();
-		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);;
+		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);
 	}
 	public void moveToAlbumClick() {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		//we need a listview to popup here
-		Popup popup = new Popup();
 		
-		popup.getContent().add(albumListView);
-		popup.show(stage);
+		ArrayList<String> albumList = new ArrayList<String>();
+		for (int i=0;i<albumObsList.size();i++) {
+			String temp = albumObsList.get(i).getName();
+			if (temp.equals(PhotosController.get_album())){
+				continue;
+			}
+			albumList.add(temp);
+		}
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(albumList.get(0).toString(), albumList);
+		dialog.setTitle("Mover");
+		dialog.setHeaderText("Choose album to move photo into:");
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+			PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(result.get()).addPhoto(listView.getSelectionModel().getSelectedItem());
+			PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);
+		}
+		
 	}
 	public void copyToAlbumClick() {
+		int index = listView.getSelectionModel().getSelectedIndex();
+		//we need a listview to popup here
 		
+		ArrayList<String> albumList = new ArrayList<String>();
+		for (int i=0;i<albumObsList.size();i++) {
+			albumList.add(albumObsList.get(i).getName());
+		}
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(albumList.get(0).toString(), albumList);
+		dialog.setTitle("Mover");
+		dialog.setHeaderText("Choose album to copy photo into:");
+		Optional<String> result = dialog.showAndWait();
+		if (result.isPresent()){
+			PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(result.get()).addPhoto(listView.getSelectionModel().getSelectedItem());
+		}
 	}
 	public void editCaptionClick() {
 		
@@ -110,6 +140,7 @@ public class OpenAlbumController {
 		if(index > -1) {
 			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
 			imageView.setImage(photo.getImage());
+			
 		}
 		
 	}
