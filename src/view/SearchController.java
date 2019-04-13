@@ -28,7 +28,7 @@ public class SearchController {
 	ListView<Photo> listView;
 	@FXML ImageView imageView;
 	
-	private ObservableList<Photo> obsList = FXCollections.observableArrayList();;
+	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	
 	public void backClick(ActionEvent event) throws Exception {
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
@@ -60,40 +60,34 @@ public class SearchController {
 		
 		String tag = tagToSearch.getText();
 		
-		//Parse tag into tag type and tag_value
-		String tag_type;
-		String tag_value;
-		String[] split_tag = tag.split("=", 2);
-		//If there was no comma
-		if(split_tag.length < 2) {
-			Alert alert = new Alert(AlertType.ERROR, "Please input a valid pair of values: tag_type=tag_value", ButtonType.OK);
-			alert.show();
-			return;
+		//If searching for two tags
+		if(tag.indexOf("AND") != -1 || tag.indexOf("OR") != -1) {
+			//Parsing the tags into two
+			String[] tags_list;
+			String tag1;
+			String tag2;
+			
+			if(tag.indexOf("AND") != -1) {
+				tags_list = tag.split("AND", 2);
+			}
+			else {
+				tags_list = tag.split("OR", 2);
+			}
+			
+			tag1 = tags_list[0].trim();
+			tag2 = tags_list[1].trim();
+			
+			ObservableList<Photo> list1 = Search.search_tag(tag1);
+			
+			ObservableList<Photo> list2 = Search.search_tag(tag2);
+			
+			obsList = Search.merge_lists(list1, list2);
+			
 		}
-		
-		//If the tag_type is empty
-		tag_type = split_tag[0].trim();
-		if(tag_type.equals("")) {
-			Alert alert = new Alert(AlertType.ERROR, "Please input non empty tag_type value", ButtonType.OK);
-			alert.show();
-			return;
+		//Just searching for one tag
+		else {
+			obsList = Search.search_tag(tag.trim());
 		}
-		
-		//If the tag_value is empty
-		tag_value = split_tag[1].trim();
-		if(tag_value.equals("")) {
-			Alert alert = new Alert(AlertType.ERROR, "Please input non empty tag_value value", ButtonType.OK);
-			alert.show();
-			return;
-		}
-		//if there are more than one comma
-		if(tag_value.indexOf("=") != -1) {
-			Alert alert = new Alert(AlertType.WARNING, "You have inputted text with more than one equals sign, all text after the first equals sign will now be considered the tag_value", ButtonType.OK);
-			alert.show();
-		}
-		
-		//Run the search and get a list of the photos with these tags
-		obsList = Search.tag_search_results(tag_type, tag_value);
 		
 		//Show the returned values
 		
