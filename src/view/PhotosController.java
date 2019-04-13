@@ -135,6 +135,14 @@ public class PhotosController {
 	}
 	
 	/**
+	 * returns the current admin model that holds on to the list of users in this application
+	 * @return Admin admin
+	 */
+	public static Admin get_admin() {
+		return admin;
+	}
+	
+	/**
 	 * Retrieves the current user
 	 */
 	public static String get_user() {
