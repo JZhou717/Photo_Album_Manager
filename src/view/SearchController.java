@@ -63,13 +63,14 @@ public class SearchController {
 		//Parse tag into tag type and tag_value
 		String tag_type;
 		String tag_value;
-		String[] split_tag = tag.split(",", 2);
+		String[] split_tag = tag.split("=", 2);
 		//If there was no comma
 		if(split_tag.length < 2) {
-			Alert alert = new Alert(AlertType.ERROR, "Please input a valid pair of values: tag_type, tag_value", ButtonType.OK);
+			Alert alert = new Alert(AlertType.ERROR, "Please input a valid pair of values: tag_type=tag_value", ButtonType.OK);
 			alert.show();
 			return;
 		}
+		
 		//If the tag_type is empty
 		tag_type = split_tag[0].trim();
 		if(tag_type.equals("")) {
@@ -77,6 +78,7 @@ public class SearchController {
 			alert.show();
 			return;
 		}
+		
 		//If the tag_value is empty
 		tag_value = split_tag[1].trim();
 		if(tag_value.equals("")) {
@@ -85,13 +87,13 @@ public class SearchController {
 			return;
 		}
 		//if there are more than one comma
-		if(tag_value.indexOf(",") != -1) {
-			Alert alert = new Alert(AlertType.WARNING, "You have inputted text with more than one comma, all text after the first comma will now be considered the tag_value", ButtonType.OK);
+		if(tag_value.indexOf("=") != -1) {
+			Alert alert = new Alert(AlertType.WARNING, "You have inputted text with more than one equals sign, all text after the first equals sign will now be considered the tag_value", ButtonType.OK);
 			alert.show();
 		}
 		
 		//Run the search and get a list of the photos with these tags
-		obsList = Search.tag_search_results();
+		obsList = Search.tag_search_results(tag_type, tag_value);
 		
 		//Show the returned values
 		

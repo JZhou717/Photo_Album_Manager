@@ -7,11 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
@@ -24,7 +26,10 @@ public class OpenAlbumController {
 	public ImageView imageView;
 	@FXML
 	public ListView<Photo> listView;
+	@FXML
+	public ListView<Album> albumListView;
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
+	private ObservableList<Album> albumObsList = FXCollections.observableArrayList();
 	final FileChooser fileChooser = new FileChooser();
 	Stage stage;
 	public void logoutClick(ActionEvent event) throws Exception {
@@ -41,7 +46,10 @@ public class OpenAlbumController {
 	public void moveToAlbumClick() {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		//we need a listview to popup here
+		Popup popup = new Popup();
 		
+		popup.getContent().add(albumListView);
+		popup.show(stage);
 	}
 	public void copyToAlbumClick() {
 		
@@ -78,8 +86,9 @@ public class OpenAlbumController {
 	public void init(Stage mainStage) {
 		
 		//Populating the list
-		
+		stage = mainStage;
 		obsList = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).populatePhotoList();
+		albumObsList = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbums();
 		//obsList.add(new Album("TOM"));
 		listView.setItems(obsList);
 		

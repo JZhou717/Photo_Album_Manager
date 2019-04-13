@@ -57,6 +57,14 @@ public class Photo implements Serializable{
 		
 	}
 	
+	/**
+	 * Get the tags for this photo
+	 * @return ObservableList of this Photo's tags
+	 */
+	public ObservableList<Tag> get_tags() {
+		return this.tag_list;
+	}
+	
 	public void set_filepath(String path) {
 		filepath = path;
 	}

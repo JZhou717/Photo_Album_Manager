@@ -65,15 +65,10 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <TextField fx:id="tagToSearch" layoutX="14.0" layoutY="53.0" promptText="Type, Value" />
+                  <TextField fx:id="tagToSearch" layoutX="14.0" layoutY="53.0" promptText="Type=Value" />
                   <Button onAction="#searchTagClick" layoutX="224.0" layoutY="63.0" mnemonicParsing="false" text="Search" />
                </children>
             </AnchorPane>
-         </children>
-      </AnchorPane>
-   </children>
-</AnchorPane>
-      </AnchorPane>
          </children>
       </AnchorPane>
    </children>
