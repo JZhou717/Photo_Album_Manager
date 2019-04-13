@@ -190,6 +190,12 @@ public class Admin implements Serializable{
 			ArrayList<User> serializable_user_list = serialized_admin.get_saved_list();
 			ret.user_list = FXCollections.observableArrayList(serializable_user_list);
 			
+			User temp;
+			for(int i = 0; i < ret.user_list.size(); i++) {
+				temp = ret.user_list.get(i);
+				temp.retrieve_serialized_data();
+			}
+			
 			ois.close();
 			return ret;
 			
@@ -198,16 +204,29 @@ public class Admin implements Serializable{
 			//e.printStackTrace();
 		}
 		ret.add_user("stock");
+		User stock = ret.getUserByName("stock");
+		stock.addAlbum("citrus");
+		Album citrus = stock.getAlbumByName("citrus");
+		
+		//citrus.addPhoto(Photo.create_photo_by_path("src/stock/blood_orange.jpg"));
+		
 		return ret;
 	}
 	
 	/**
 	 * Serialize the data stored in admin
+	 * Moves the data in the observable array list to the array list and tells User objects to do the same thing
 	 * @throws IOException if something goes wrong with serializing
 	 */
 	public void serialize() throws IOException{
 		
 		serializable_user_list = new ArrayList<User>(user_list);
+		User temp;
+		
+		for(int i = 0; i < user_list.size(); i++) {
+			temp = user_list.get(i);
+			temp.serialize();
+		}
 		//System.out.println("Serializing list size" + serializable_user_list.size());
 		
 		ObjectOutputStream oos = new ObjectOutputStream(

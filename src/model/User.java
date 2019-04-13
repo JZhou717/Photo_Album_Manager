@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +33,11 @@ public class User implements Serializable{
 	private transient ObservableList<Album> myAlbums;
 	
 	/**
+	 * ArrayList that is only used when the program is opened or closed
+	 */
+	private ArrayList<Album> serializable_album_list;
+	
+	/**
 	 * Constructor for a new user
 	 * @param name The string username needed to create the user
 	 */
@@ -56,6 +62,7 @@ public class User implements Serializable{
 	public ObservableList<Album> getAlbums(){
 		return this.myAlbums;
 	}
+	
 	public Album addAlbum(String n) {
 		String name = n.trim();
 		String existing_name;
@@ -76,6 +83,7 @@ public class User implements Serializable{
 		
 		
 	}
+	
 	public void removeAlbum(String name) {
 		name.toLowerCase();
 		String existingName;
@@ -95,9 +103,11 @@ public class User implements Serializable{
 		alert.show();
 		return;
 	}
+	
 	public Album getAlbumAt(int i) {
 		return myAlbums.get(i);
 	}
+	
 	public Album getAlbumByName(String str) {
 		String existing;
 		str.toLowerCase();
@@ -116,7 +126,22 @@ public class User implements Serializable{
 		alert.show();
 		return null;
 	}
+	
 	public ObservableList<Album> populateAlbumList() {
 		return myAlbums;
+	}
+	
+	public void retrieve_serialized_data() {
+		myAlbums = FXCollections.observableArrayList(serializable_album_list);
+		for(int i = 0; i < serializable_album_list.size(); i++) {
+			myAlbums.get(i).retrieve_serialized_data();
+		}
+	}
+	
+	public void serialize() {
+		serializable_album_list = new ArrayList<Album>(myAlbums);
+		for(int i = 0; i < myAlbums.size(); i++) {
+			myAlbums.get(i).serialize();
+		}
 	}
 }
