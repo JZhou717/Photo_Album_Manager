@@ -23,7 +23,7 @@ public class OpenAlbumController {
 	@FXML
 	public ImageView imageView;
 	@FXML
-	public ListView listView;
+	public ListView<Photo> listView;
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	final FileChooser fileChooser = new FileChooser();
 	Stage stage;
@@ -58,8 +58,8 @@ public class OpenAlbumController {
         	String path = file.toURI().toString();
             Image image = new Image(path);
             imageView.setImage(image);
-            String photoName = file.getName();
-            Photo photo = new Photo(image);
+            //String photoName = file.getName();
+            Photo photo = new Photo(image, path);
             //writing code here
             Album album = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album());
             album.addPhoto(photo);

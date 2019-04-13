@@ -1,7 +1,6 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
-import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
@@ -12,7 +11,6 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import model.Admin;
-import model.User;
 
 /**
  * The main controller for this application

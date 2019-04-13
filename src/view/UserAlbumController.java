@@ -1,27 +1,18 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
-import java.util.Optional;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import model.Admin;
 import model.Album;
-import model.User;
 
 
 public class UserAlbumController {

@@ -2,13 +2,9 @@ package model;
 
 
 import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
-
-import javax.imageio.ImageIO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,13 +19,20 @@ import javafx.scene.image.Image;
 
 public class Photo implements Serializable{
 	
+	/**
+	 * Generated Serial Version UID
+	 */
+	private static final long serialVersionUID = 4246464515728856009L;
+	
 	private String caption;
 	private transient ObservableList<Tag> tag_list;
 	private ArrayList<Tag> serializable_tag_list;
 	private Calendar date;
-	private Image image;
+	private transient Image image;
+	private String filepath;
 	
-	public Photo(Image i) {
+	public Photo(Image i, String path) {
+		this.filepath = path;
 		caption = "";
 		tag_list = FXCollections.observableArrayList();
 		date = Calendar.getInstance();
@@ -38,12 +41,24 @@ public class Photo implements Serializable{
 		
 	}
 	
-	public static Photo create_photo_by_path(String filepath) throws IOException {
-		//File source = new File(filepath);
-		//BufferedImage image = ImageIO.read(source);
-		Image image = new Image(filepath);
-		return new Photo(image);
+	public static Photo create_photo_by_path(String filepath) {
 		
+		try {
+			File file = new File(filepath);
+	        
+        	String path = file.toURI().toString();
+            Image image = new Image(path);
+            return new Photo(image, path);
+        }
+        catch(Exception e) {
+        	e.printStackTrace();
+        	return null;
+        }
+		
+	}
+	
+	public void set_filepath(String path) {
+		filepath = path;
 	}
 	
 	public String getCaption() {
@@ -69,6 +84,10 @@ public class Photo implements Serializable{
 	public void retrieve_serialized_data() {
 		// TODO Auto-generated method stub
 		tag_list = FXCollections.observableArrayList(serializable_tag_list);
+		
+		File file = new File(filepath);
+    	String path = file.toURI().toString();
+        image = new Image(path);
 				
 	}
 	

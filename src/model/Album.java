@@ -16,6 +16,11 @@ import javafx.collections.ObservableList;
 
 public class Album implements Serializable{
 	
+	/**
+	 * Generated Serial Version UID
+	 */
+	private static final long serialVersionUID = -5502974855922249071L;
+	
 	private String name;
 	private transient ObservableList<Photo> myPhotos;
 	

@@ -205,10 +205,21 @@ public class Admin implements Serializable{
 		}
 		ret.add_user("stock");
 		User stock = ret.getUserByName("stock");
-		stock.addAlbum("citrus");
-		Album citrus = stock.getAlbumByName("citrus");
 		
-		//citrus.addPhoto(Photo.create_photo_by_path("src/stock/blood_orange.jpg"));
+		Album citrus = stock.addAlbum("citrus");
+			citrus.addPhoto(Photo.create_photo_by_path("stock/blood_orange.jpg"));
+			citrus.addPhoto(Photo.create_photo_by_path("stock/grapefruit.jpg"));
+			citrus.addPhoto(Photo.create_photo_by_path("stock/mandarin.jpg"));
+			
+		Album stock_images = stock.addAlbum("stock_images");
+			stock_images.addPhoto(Photo.create_photo_by_path("stock/chicken.jpg"));
+			stock_images.addPhoto(Photo.create_photo_by_path("stock/feet.jpg"));
+			stock_images.addPhoto(Photo.create_photo_by_path("stock/watermelon.jpg"));
+			
+		Album tommy = stock.addAlbum("Tommy");
+			tommy.addPhoto(Photo.create_photo_by_path("stock/baseball.png"));
+			tommy.addPhoto(Photo.create_photo_by_path("stock/hurley.png"));
+			tommy.addPhoto(Photo.create_photo_by_path("stock/sanders.jpg"));
 		
 		return ret;
 	}
