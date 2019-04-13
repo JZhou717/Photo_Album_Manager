@@ -40,6 +40,7 @@ public class OpenAlbumController {
 	}
 	public void moveToAlbumClick() {
 		int index = listView.getSelectionModel().getSelectedIndex();
+		//we need a listview to popup here
 		
 	}
 	public void copyToAlbumClick() {
