@@ -35,6 +35,8 @@ public class OpenAlbumController {
 	}
 	public void deletePhotoClick() {
 		
+		int index = listView.getSelectionModel().getSelectedIndex();
+		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);;
 	}
 	public void moveToAlbumClick() {
 		

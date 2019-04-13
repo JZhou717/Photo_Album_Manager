@@ -85,7 +85,7 @@ public class User implements Serializable{
 	}
 	
 	public void removeAlbum(String name) {
-		name.toLowerCase();
+		name = name.toLowerCase();
 		String existingName;
 		if (myAlbums.size()==0) {
 			Alert alert = new Alert(AlertType.ERROR, "List empty. Album does not exist", ButtonType.OK);

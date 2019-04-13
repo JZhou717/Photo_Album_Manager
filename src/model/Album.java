@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 
 
 /**
@@ -23,12 +26,15 @@ public class Album implements Serializable{
 	
 	private String name;
 	private transient ObservableList<Photo> myPhotos;
-	
+	private int size;
 	private ArrayList<Photo> serializable_photo_list;
 	
 	public Album(String name) {
 		this.name = name;
 		myPhotos = FXCollections.observableArrayList();
+	}
+	public int size() {
+		return this.size;
 	}
 	
 	public String getName() {
@@ -46,12 +52,15 @@ public class Album implements Serializable{
 		return myPhotos.get(i);
 	}
 	
+	
+	
 	public void addPhoto(Photo newPhoto){
 		myPhotos.add(newPhoto);
 	}
 	
-	public void deletePhoto(Photo unwanted) {
-		myPhotos.remove(unwanted);
+	public void deletePhotoAt(int i) {
+		myPhotos.remove(i);
+		
 	}
 	
 	public String toString() {
