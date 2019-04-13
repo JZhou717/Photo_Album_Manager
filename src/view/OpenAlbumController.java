@@ -13,8 +13,10 @@ import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
@@ -25,6 +27,8 @@ import model.Photo;
 public class OpenAlbumController {
 	@FXML
 	public TextField tagToAddText;
+	@FXML
+	public Text captionText;
 	@FXML
 	public ImageView imageView;
 	@FXML
@@ -85,13 +89,25 @@ public class OpenAlbumController {
 		}
 	}
 	public void editCaptionClick() {
-		
+		TextInputDialog tid = new TextInputDialog();
+		tid.setHeaderText("Caption");
+		tid.setContentText("New Caption: ");
+		String result = tid.showAndWait().orElse(null);
+		if (result==null) {
+			return;
+		}
+		captionText.setText("Caption: " + result);
+		listView.getSelectionModel().getSelectedItem().editCaption(result);
 	}
 	public void deleteTagClick() {
 		
 	}
 	public void addTagClick() {
-		String tag = tagToAddText.getText();
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(tagList);
+		dialog.setTitle("Mover");
+		dialog.setHeaderText("Choose album to copy photo into:");
+		Optional<String> result = dialog.showAndWait();
+		
 	}
 	public void selectPhotoClick() {
 		//this one is to add photos
@@ -140,7 +156,7 @@ public class OpenAlbumController {
 		if(index > -1) {
 			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
 			imageView.setImage(photo.getImage());
-			
+			captionText.setText("Caption: " + photo.getCaption());
 		}
 		
 	}
