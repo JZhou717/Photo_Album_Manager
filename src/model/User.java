@@ -110,7 +110,7 @@ public class User implements Serializable{
 	
 	public Album getAlbumByName(String str) {
 		String existing;
-		str.toLowerCase();
+		String name = str.toLowerCase();
 		if (myAlbums.size()==0) {
 			Alert alert = new Alert(AlertType.ERROR, "List empty. Album does not exist", ButtonType.OK);
 			alert.show();
@@ -118,7 +118,7 @@ public class User implements Serializable{
 		}
 		for (int i=0;i<myAlbums.size();i++) {
 			existing = myAlbums.get(i).getName().toLowerCase();
-			if (str.equals(existing)) {
+			if (name.equals(existing)) {
 				return myAlbums.get(i);
 			}
 		}
@@ -145,6 +145,11 @@ public class User implements Serializable{
 		
 		return false;
 	}
+	
+	/**
+	 * Moves data from the serializable ArrayList to the observable list we use for ListView
+	 * Tells all albums of this user to restore data too
+	 */
 	public void retrieve_serialized_data() {
 		myAlbums = FXCollections.observableArrayList(serializable_album_list);
 		for(int i = 0; i < serializable_album_list.size(); i++) {

@@ -203,6 +203,8 @@ public class Admin implements Serializable{
 		catch(EOFException e) {
 			//e.printStackTrace();
 		}
+		
+		//There was no admin in the stored data, creating a new instance of admin
 		ret.add_user("stock");
 		User stock = ret.getUserByName("stock");
 		

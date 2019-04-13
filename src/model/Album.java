@@ -58,16 +58,21 @@ public class Album implements Serializable{
 		return this.name;
 	}
 
+	
+	public ObservableList<Photo> populatePhotoList() {
+		return myPhotos;
+	}
+	
+	/**
+	 * Moves data from the serializable ArrayList to the observable list we use for ListView
+	 * Tells all Photos of this user to restore data too
+	 */
 	public void retrieve_serialized_data() {
-		// TODO Auto-generated method stub
 		myPhotos = FXCollections.observableArrayList(serializable_photo_list);
 		for(int i = 0; i < serializable_photo_list.size(); i++) {
 			myPhotos.get(i).retrieve_serialized_data();
 		}
 		
-	}
-	public ObservableList<Photo> populatePhotoList() {
-		return myPhotos;
 	}
 	
 	public void serialize() {
