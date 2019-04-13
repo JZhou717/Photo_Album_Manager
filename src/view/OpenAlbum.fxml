@@ -20,13 +20,13 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="352.0" fitWidth="295.0" layoutX="15.0" layoutY="63.0" pickOnBounds="true" preserveRatio="true" />
+                  <ListView fx:id="listView" prefHeight="352.0" prefWidth="295.0" layoutX="15.0" layoutY="63.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="402.0" layoutY="14.0" prefHeight="638.0" prefWidth="622.0" style="-fx-border-color: #000000;">
                <children>
                   <Text layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="152.99999779462814" />
-                  <ImageView fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
                   <Button onAction="#deletePhotoClick" layoutX="71.0" layoutY="380.0" mnemonicParsing="false" text="Delete Photo" />
                   <Button onAction="#moveToAlbumClick" layoutX="251.0" layoutY="380.0" mnemonicParsing="false" text="Move to Album" />
                   <Button onAction="#copyToAlbumClick" layoutX="434.0" layoutY="380.0" mnemonicParsing="false" text="Copy to Album" />

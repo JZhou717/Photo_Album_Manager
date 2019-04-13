@@ -81,6 +81,8 @@ public class UserAlbumController {
 			alert.show();
 			return;
 		}else {
+			PhotosController.set_album(name);
+			PhotosController.open_album_controller.init(PhotosController.stage);
 			PhotosController.stage.setScene(PhotosController.open_album_scene);
 			PhotosController.stage.show();
 		}

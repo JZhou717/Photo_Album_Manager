@@ -34,8 +34,11 @@ public class Album implements Serializable{
 		this.name = rename;
 	}
 	
-	public ObservableList<Photo> getPhoto(){
+	public ObservableList<Photo> getPhotos(){
 		return this.myPhotos;
+	}
+	public Photo getPhotoAt(int i) {
+		return myPhotos.get(i);
 	}
 	
 	public void addPhoto(Photo newPhoto){
@@ -57,6 +60,9 @@ public class Album implements Serializable{
 			myPhotos.get(i).retrieve_serialized_data();
 		}
 		
+	}
+	public ObservableList<Photo> populatePhotoList() {
+		return myPhotos;
 	}
 	
 	public void serialize() {

@@ -130,7 +130,21 @@ public class User implements Serializable{
 	public ObservableList<Album> populateAlbumList() {
 		return myAlbums;
 	}
-	
+	public boolean album_exists(String n) {
+		
+		String name = n.toLowerCase();
+		
+		String existing_name;
+		
+		for(int i = 0; i < myAlbums.size(); i++) {
+			existing_name = myAlbums.get(i).getName().toLowerCase();
+			if(name.equals(existing_name)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	public void retrieve_serialized_data() {
 		myAlbums = FXCollections.observableArrayList(serializable_album_list);
 		for(int i = 0; i < serializable_album_list.size(); i++) {

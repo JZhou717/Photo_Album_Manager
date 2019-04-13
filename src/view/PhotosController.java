@@ -44,6 +44,7 @@ public class PhotosController {
 	 * The name of the current user
 	 */
 	private transient static String current_user;
+	private transient static String current_album;
 	
 	
 	/**
@@ -122,12 +123,27 @@ public class PhotosController {
 			return;
 		}
 	}
+	//writing functions here
+	public static void set_album(String name) {
+		if(PhotosController.admin.getUserByName(current_user).album_exists(name)) {
+			current_album = name;
+		}
+	
+		else {
+			Alert alert = new Alert(AlertType.ERROR, "Setting to nonexistent album", ButtonType.OK);
+			alert.show();
+			return;
+		}
+	}
 	
 	/**
 	 * Retrieves the current user
 	 */
 	public static String get_user() {
 		return current_user;
+	}
+	public static String get_album() {
+		return current_album;
 	}
 	
 	/*
