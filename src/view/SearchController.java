@@ -11,6 +11,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import model.Photo;
 import model.Search;
 
@@ -29,6 +30,35 @@ public class SearchController {
 	@FXML ImageView imageView;
 	
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
+	
+	public void init(Stage mainStage) {
+		
+		listView.setItems(obsList);
+		
+		
+		//listener
+		listView
+			.getSelectionModel()
+			.selectedIndexProperty()
+			.addListener(
+				(obs, oldVal, newVal) ->
+					showItemInputDialog(mainStage));
+		listView.getSelectionModel().select(0);
+		
+		
+	}
+	
+	private void showItemInputDialog(Stage mainStage) {
+		
+		int index = listView.getSelectionModel().getSelectedIndex();
+		
+		if(index > -1) {
+			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
+			imageView.setImage(photo.getImage());
+			
+		}
+		
+	}
 	
 	public void backClick(ActionEvent event) throws Exception {
 		PhotosController.stage.setScene(PhotosController.user_album_scene);

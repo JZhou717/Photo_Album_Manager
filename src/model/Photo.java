@@ -77,6 +77,10 @@ public class Photo implements Serializable{
 		tag_list.add(new Tag(name, value));
 	}
 	
+	public void deleteTag(Tag tag) {
+		tag_list.remove(tag);
+	}
+	
 	public void editCaption(String newCaption) {
 		caption = newCaption;
 	}
