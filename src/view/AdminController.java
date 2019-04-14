@@ -42,6 +42,9 @@ public class AdminController {
 		else {
 			//adding user
 			PhotosController.admin.add_user(name);
+			//PhotosController.admin.getUserByName(name).addTag("Location");
+			//PhotosController.admin.getUserByName(name).addTag("Person");
+			
 		}
 	}
 	

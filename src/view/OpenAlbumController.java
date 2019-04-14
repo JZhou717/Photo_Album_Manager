@@ -9,6 +9,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
@@ -22,6 +25,7 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
+import model.Tag;
 
 
 public class OpenAlbumController {
@@ -37,6 +41,7 @@ public class OpenAlbumController {
 	public ListView<Album> albumListView;
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	private ObservableList<Album> albumObsList = FXCollections.observableArrayList();
+
 	final FileChooser fileChooser = new FileChooser();
 	Stage stage;
 	public void logoutClick(ActionEvent event) throws Exception {
@@ -78,7 +83,11 @@ public class OpenAlbumController {
 		
 		ArrayList<String> albumList = new ArrayList<String>();
 		for (int i=0;i<albumObsList.size();i++) {
-			albumList.add(albumObsList.get(i).getName());
+			String temp = albumObsList.get(i).getName();
+			if (temp.equals(PhotosController.get_album())){
+				continue;
+			}
+			albumList.add(temp);
 		}
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(albumList.get(0).toString(), albumList);
 		dialog.setTitle("Mover");
@@ -103,9 +112,15 @@ public class OpenAlbumController {
 		
 	}
 	public void addTagClick() {
-		ChoiceDialog<String> dialog = new ChoiceDialog<String>(tagList);
-		dialog.setTitle("Mover");
-		dialog.setHeaderText("Choose album to copy photo into:");
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		ArrayList<String> tagList = PhotosController.admin.getUserByName(PhotosController.get_user()).getTags();
+		
+		ChoiceDialog<String> dialog = new ChoiceDialog<String>(tagList.get(0), tagList);
+		dialog.setTitle("Tagger");
+		dialog.setHeaderText("Choose type from list or select 'New Tag':");
+		//ButtonType buttonTypeNew = new ButtonType("New Tag");
+		//alert.getButtonTypes().setAll(buttonTypeNew);
 		Optional<String> result = dialog.showAndWait();
 		
 	}

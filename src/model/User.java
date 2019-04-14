@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,9 +39,13 @@ public class User implements Serializable{
 	private ArrayList<Album> serializable_album_list;
 	
 	/**
+	 * List of preset tags that they can choose from or add to
+	 */
+	private ArrayList<String> tags = new ArrayList<String>(Arrays.asList("Location", "Person"));
+	/**
 	 * Constructor for a new user
 	 * @param name The string username needed to create the user
-	 */
+	 */	
 	public User(String name) {
 		this.username = name;
 		this.myAlbums = FXCollections.observableArrayList();
@@ -83,7 +88,12 @@ public class User implements Serializable{
 		
 		
 	}
-	
+	public ArrayList<String> getTags(){
+		return this.tags;
+	}
+	public void addTag(String n) {
+		tags.add(n);
+	}
 	public void removeAlbum(String name) {
 		name = name.toLowerCase();
 		String existingName;
