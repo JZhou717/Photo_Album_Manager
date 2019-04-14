@@ -56,10 +56,12 @@ public class Album implements Serializable{
 	
 	public void addPhoto(Photo newPhoto){
 		myPhotos.add(newPhoto);
+		size++;
 	}
 	
 	public void deletePhotoAt(int i) {
 		myPhotos.remove(i);
+		size--;
 		
 	}
 	

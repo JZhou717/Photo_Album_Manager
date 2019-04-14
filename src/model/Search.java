@@ -172,10 +172,10 @@ public class Search{
 		Photo photo;
 		ObservableList<Tag> photo_tags;
 		
-		
 		//Going through each Album of the User
 		for(int i = 0; i < user_albums.size(); i++) {
 			album = user_albums.get(i);
+			
 			//Going through each Photo in the Album
 			for(int j = 0; j < album.size(); j++) {
 				photo = album.getPhotoAt(j);

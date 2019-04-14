@@ -34,6 +34,7 @@ public class UserAlbumController {
 
 	}
 	public void goToSearchClick(ActionEvent event) throws Exception {
+		PhotosController.search_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.search_scene);
 		PhotosController.stage.show();
 	}

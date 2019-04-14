@@ -27,7 +27,8 @@ public class SearchController {
 	public TextField startDate;
 	@FXML 
 	ListView<Photo> listView;
-	@FXML ImageView imageView;
+	@FXML 
+	ImageView imageView;
 	
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	
@@ -53,7 +54,8 @@ public class SearchController {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index > -1) {
-			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
+			Photo photo = obsList.get(index);
+			
 			imageView.setImage(photo.getImage());
 			
 		}
