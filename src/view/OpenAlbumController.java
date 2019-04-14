@@ -137,7 +137,10 @@ public class OpenAlbumController {
 			if (res==null) {
 				return;
 			}
-			PhotosController.admin.getUserByName(PhotosController.get_user()).addTag(res);
+			if (!PhotosController.admin.getUserByName(PhotosController.get_user()).getTags().contains(res)) {
+				PhotosController.admin.getUserByName(PhotosController.get_user()).addTag(res);
+			}
+			
 			type = res;
 			
 		}else {
