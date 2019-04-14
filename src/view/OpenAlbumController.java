@@ -172,6 +172,7 @@ public class OpenAlbumController {
 		
 	}
 	public void backClick() {
+		imageView.setImage(null);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
 	}

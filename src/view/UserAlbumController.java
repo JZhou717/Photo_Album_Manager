@@ -28,12 +28,15 @@ public class UserAlbumController {
 	private ObservableList<Album> obsList = FXCollections.observableArrayList();
 	
 	public void logoutClick(ActionEvent event) throws Exception {
-		
+		albumInfo.setText("");
+		newAlbumName.setText("");
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
 	}
 	public void goToSearchClick(ActionEvent event) throws Exception {
+		
+		newAlbumName.setText("");
 		PhotosController.search_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.search_scene);
 		PhotosController.stage.show();
@@ -67,6 +70,8 @@ public class UserAlbumController {
 		//update listview here
 	}
 	public void openAlbumClick() {
+		
+		newAlbumName.setText("");
 		String name = albumInfo.getText();
 		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
 			Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);

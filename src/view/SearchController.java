@@ -63,6 +63,7 @@ public class SearchController {
 	}
 	
 	public void backClick(ActionEvent event) throws Exception {
+		PhotosController.user_album_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
 		/* UPDATE THIS TO THE NEW IMPLEMENTATION

@@ -3,7 +3,10 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 
 
@@ -33,6 +36,7 @@ public class LoginController {
 			Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 			mainWindow.setScene(newScene);
 			*/
+			username.setText("");
 			PhotosController.set_user(name);
 			PhotosController.stage.setScene(PhotosController.user_album_scene);
 			PhotosController.user_album_controller.init(PhotosController.stage);
@@ -43,7 +47,9 @@ public class LoginController {
 		}
 		//check in a loaded list of valid usernames
 		else {
-			setText.setText("Username does not exist");
+			Alert alert = new Alert(AlertType.ERROR, "User does not exist", ButtonType.OK);
+			alert.show();
+			return;
 
 		}
 		
