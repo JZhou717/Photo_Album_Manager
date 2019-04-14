@@ -215,5 +215,45 @@ public class Search{
 		return false;
 		
 	}
+
+	/**
+	 * Creates a new album for the current User with the given search results
+	 * @param album_name String of the album name that the user intends to create
+	 * @param obsList the list of Photos to add to the album
+	 */
+	public static void add_album_from_result(String album_name, ObservableList<Photo> obsList) {
+		
+		String name = album_name.trim();
+		
+		if(album_exists(name)) {
+			Alert alert = new Alert(AlertType.ERROR, "Album name already taken. Aborting album creation", ButtonType.OK);
+			alert.show();
+			return;
+		}
+		else {
+			Album new_album = new Album(name, obsList);
+			new_album.set_size(obsList.size());
+			PhotosController.get_admin().getUserByName(PhotosController.get_user()).addAlbum(new_album);
+		}
+		
+	}
+
+	private static boolean album_exists(String n) {
+		
+		String name = n.trim();
+		String existing_name;
+		
+		ObservableList<Album> user_albums = PhotosController.get_admin().getUserByName(PhotosController.get_user()).getAlbums();
+		
+		//Searching to see if this album name already exists for this user
+		for(int i = 0; i < user_albums.size(); i++) {
+			existing_name = user_albums.get(i).getName();
+			if(name.equalsIgnoreCase(existing_name)) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
 		
 }

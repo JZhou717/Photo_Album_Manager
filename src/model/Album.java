@@ -30,8 +30,18 @@ public class Album implements Serializable{
 		this.name = name;
 		myPhotos = FXCollections.observableArrayList();
 	}
+	
+	public Album(String name, ObservableList<Photo> photo_list) {
+		this.name = name;
+		myPhotos = photo_list;
+	}
+	
 	public int size() {
 		return this.size;
+	}
+	
+	public void set_size(int s) {
+		this.size = s;
 	}
 	
 	public String getName() {

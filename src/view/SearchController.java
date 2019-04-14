@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import model.Photo;
@@ -147,7 +148,16 @@ public class SearchController {
 	
 	public void create_album_from_result(ActionEvent event) throws Exception {
 		
+		TextInputDialog tid = new TextInputDialog();
+		tid.setHeaderText("Enter name for new Album:");
+		tid.setContentText("New Name: ");
+		String name = tid.showAndWait().orElse(null);
+		if (name == null) {
+			return;
+		}
+		name = name.trim();
 		
+		Search.add_album_from_result(name, obsList);
 		
 	}
 	

@@ -88,6 +88,15 @@ public class User implements Serializable{
 		
 		
 	}
+	
+	public Album addAlbum(Album alb) {
+		
+		myAlbums.add(alb);
+		return alb;
+		
+		
+	}
+	
 	public ArrayList<String> getTags(){
 		return this.tags;
 	}
