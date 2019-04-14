@@ -30,6 +30,7 @@ public class Photo implements Serializable{
 	private Calendar date;
 	private transient Image image;
 	private String filepath;
+	private String name;
 	
 	public Photo(Image i, String path) {
 		this.filepath = path;
@@ -48,7 +49,9 @@ public class Photo implements Serializable{
 	        
         	String path = file.toURI().toString();
             Image image = new Image(path);
-            return new Photo(image, path);
+            Photo photo = new Photo(image, path);
+            photo.setName(file.getName());
+            return photo;
         }
         catch(Exception e) {
         	e.printStackTrace();
@@ -126,10 +129,15 @@ public class Photo implements Serializable{
 	 * retrieves the filepath of the image this photo shows
 	 * @return String of the filepath
 	 */
-	private String getFilePath() {
+	public String getFilePath() {
 		return filepath;
 	}
-
+	public String toString() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public boolean in_date_range(String start, String end) {
 		// TODO Auto-generated method stub
 		return false;

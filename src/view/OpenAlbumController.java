@@ -158,6 +158,8 @@ public class OpenAlbumController {
             imageView.setImage(image);
             //String photoName = file.getName();
             Photo photo = new Photo(image, path);
+           
+            photo.setName(file.getName());
             //writing code here
             Album album = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album());
             album.addPhoto(photo);
