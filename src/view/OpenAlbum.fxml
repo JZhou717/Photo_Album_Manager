@@ -36,7 +36,7 @@
                   <Text layoutX="60.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />
                   <Button onAction="#deleteTagClick" layoutX="273.0" layoutY="489.0" mnemonicParsing="false" text="Delete Selected Tag" />
                   <Button onAction="#addTagClick" layoutX="329.0" layoutY="574.0" mnemonicParsing="false" text="Add Tag" />
-                  <TextField fx:id="tagToAddText" layoutX="273.0" layoutY="536.0" promptText="Type, Value" />
+                  <!-- <TextField fx:id="tagToAddText" layoutX="273.0" layoutY="536.0" promptText="Type, Value" /> -->
                </children>
             </AnchorPane>
             <Button onAction="#logoutClick" layoutX="816.0" layoutY="661.0" mnemonicParsing="false" text="Logout">

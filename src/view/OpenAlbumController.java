@@ -111,6 +111,7 @@ public class OpenAlbumController {
 		listView.getSelectionModel().getSelectedItem().editCaption(result);
 	}
 	public void deleteTagClick() {
+		listView.getSelectionModel().getSelectedItem().deleteTag(tagListView.getSelectionModel().getSelectedItem());
 		
 	}
 	public void addTagClick() {
@@ -191,6 +192,8 @@ public class OpenAlbumController {
 		listView.getSelectionModel().select(0);
 		
 		
+		
+		
 	}
 	private void showItemInputDialog(Stage mainStage) {
 		
@@ -204,6 +207,8 @@ public class OpenAlbumController {
 		}
 		
 	}
+	
+	
 	
 	
 }
