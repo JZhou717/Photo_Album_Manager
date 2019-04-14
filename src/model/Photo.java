@@ -104,5 +104,27 @@ public class Photo implements Serializable{
 		serializable_tag_list = new ArrayList<Tag>(tag_list);
 	}
 		
+	/**
+	 * Checks to see if the input Photo is equal to this one
+	 * @return true if they have the same filepath, false otherwise
+	 */
+	@Override
+	public boolean equals(Object p) {
+		if (p == null || !(p instanceof Photo)) {
+			return false;
+		}
+		Photo other = (Photo) p;
+		
+		return this.filepath == other.getFilePath();
+	}
+
+	/**
+	 * retrieves the filepath of the image this photo shows
+	 * @return String of the filepath
+	 */
+	private String getFilePath() {
+		return filepath;
+	}
+	
 	
 }

@@ -51,11 +51,20 @@ public class SearchController {
 	public void editCaptionClick() {
 		
 	}
+	
+	/**
+	 * Sets the listview to the results of the date search
+	 */
 	public void searchDateClick() {
 		String start = startDate.getText();
 		String end = endDate.getText();
+		
+		
 	}
 	
+	/**
+	 * Sets the listview to the results of the tag search
+	 */
 	public void searchTagClick() {
 		
 		String tag = tagToSearch.getText();
@@ -90,7 +99,8 @@ public class SearchController {
 		}
 		
 		//Show the returned values
-		
+		listView.setItems(obsList);;
+		listView.getSelectionModel().select(0);
 	}
 	
 	public void logoutClick(ActionEvent event) throws Exception {
