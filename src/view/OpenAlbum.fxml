@@ -25,12 +25,12 @@
             </AnchorPane>
             <AnchorPane layoutX="402.0" layoutY="14.0" prefHeight="638.0" prefWidth="622.0" style="-fx-border-color: #000000;">
                <children>
-                  <Text layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="152.99999779462814" />
+                  <Text fx:id="dateText" layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="450" />
                   <ImageView fx:id="imageView" fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
-                  <Button onAction="#deletePhotoClick" layoutX="71.0" layoutY="380.0" mnemonicParsing="false" text="Delete Photo" />
-                  <Button onAction="#moveToAlbumClick" layoutX="251.0" layoutY="380.0" mnemonicParsing="false" text="Move to Album" />
-                  <Button onAction="#copyToAlbumClick" layoutX="434.0" layoutY="380.0" mnemonicParsing="false" text="Copy to Album" />
-                  <Text fx:id="captionText" layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="152.99999779462814" />
+                  <Button onAction="#deletePhotoClick" layoutX="71.0" layoutY="420.0" mnemonicParsing="false" text="Delete Photo" />
+                  <Button onAction="#moveToAlbumClick" layoutX="251.0" layoutY="420.0" mnemonicParsing="false" text="Move to Album" />
+                  <Button onAction="#copyToAlbumClick" layoutX="434.0" layoutY="420.0" mnemonicParsing="false" text="Copy to Album" />
+                  <Text fx:id="captionText" layoutX="71.0" layoutY="357.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="370" />
                   <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
                   <ListView fx:id="tagListView" layoutX="60.0" layoutY="482.0" prefHeight="107.0" prefWidth="200.0" />
                   <Text layoutX="60.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />

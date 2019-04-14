@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -70,7 +72,7 @@ public class Search{
 	 * @param end The end of the date range
 	 * @return observable list of photos that were last modified within the date range
 	 */
-	public static ObservableList<Photo> search_date(String start, String end) {
+	public static ObservableList<Photo> search_date(LocalDate start, LocalDate end) {
 		
 		// Check the format of the date here
 		
@@ -128,7 +130,7 @@ public class Search{
 	 * @param end the end of the range of dates to check
 	 * @return ObservableList of Photos that were last modified within the dates
 	 */
-	private static ObservableList<Photo> date_search_results(String start, String end) {
+	private static ObservableList<Photo> date_search_results(LocalDate start, LocalDate end) {
 		
 		ObservableList<Photo> ret = FXCollections.observableArrayList();
 		
@@ -145,6 +147,7 @@ public class Search{
 			for(int j = 0; j < album.size(); j++) {
 				photo = album.getPhotoAt(j);
 				if(photo.in_date_range(start, end)) {
+					
 					ret.add(photo);
 				}
 			}

@@ -1,30 +1,46 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Photo;
 import model.Search;
+import model.Tag;
 
 
 public class SearchController {
 	@FXML
 	public TextField tagToAdd;
 	@FXML
+	public ComboBox<String> typeFilter;
+	@FXML
 	public TextField tagToSearch;
 	@FXML
-	public TextField endDate;
+	public Text dateText;
 	@FXML
-	public TextField startDate;
+	public Text captionText;
+	@FXML
+	public DatePicker endDate;
+	@FXML
+	public DatePicker startDate;
 	@FXML 
 	ListView<Photo> listView;
+	@FXML 
+	ListView<Tag> tagListView;
 	@FXML 
 	ImageView imageView;
 	
@@ -33,7 +49,10 @@ public class SearchController {
 	public void init(Stage mainStage) {
 		
 		listView.setItems(obsList);
-		
+		ObservableList<String> o =  FXCollections.observableArrayList();
+		o.addAll("No Filter", "jpg", "png", "gif");
+		typeFilter.getItems().addAll(o);
+		typeFilter.setValue("No Filter");
 		
 		//listener
 		listView
@@ -52,15 +71,21 @@ public class SearchController {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		
 		if(index > -1) {
-			Photo photo = obsList.get(index);
+			Photo photo = listView.getSelectionModel().getSelectedItem();
 			
 			imageView.setImage(photo.getImage());
-			
+			Date date = photo.getDate().getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            dateText.setText("Photo from: " + sdf.format(date));
+			captionText.setText("Caption: " + photo.getCaption());
+			tagListView.setItems(listView.getSelectionModel().getSelectedItem().get_tags());
 		}
 		
 	}
 	
 	public void backClick(ActionEvent event) throws Exception {
+		tagListView.setItems(null);
+		imageView.setImage(null);
 		PhotosController.user_album_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
@@ -73,13 +98,51 @@ public class SearchController {
 		*/
 		
 	}
-	public void deleteTagClick() {
+	
+	public void filterClick() {
 		
-	}
-	public void addTagClick() {
-		//String tag = tagToAdd.getText();
-	}
-	public void editCaptionClick() {
+		String name = typeFilter.getValue();
+		
+		
+		if (name.equals("No Filter")) {
+			return;
+		}
+		ObservableList<Photo> filterList = FXCollections.observableArrayList();
+		if (name.equals("jpg")) {
+			
+			for (int i=0;i<obsList.size();i++) {
+				
+				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("jpg")){
+					
+					filterList.add(obsList.get(i));
+				}
+			
+			
+			}
+			
+		}
+		if (name.equals("png")) {
+			for (int i=0;i<obsList.size();i++) {
+				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("png")){
+					filterList.add(obsList.get(i));
+				}
+			
+			}
+			
+		}
+		if (name.equals("gif")) {
+			for (int i=0;i<obsList.size();i++) {
+				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("gif")){
+					filterList.add(obsList.get(i));
+				}
+			
+			}
+			
+			
+		}
+	
+		listView.setItems(filterList);
+		listView.getSelectionModel().select(0);
 		
 	}
 	
@@ -87,8 +150,13 @@ public class SearchController {
 	 * Sets the listview to the results of the date search
 	 */
 	public void searchDateClick() {
+		tagListView.setItems(null);
+		imageView.setImage(null);
+		LocalDate start = startDate.getValue();
+		LocalDate end = endDate.getValue();
+		/*
 		String start = startDate.getText().trim();
-		String end = endDate.getText().trim();
+		String end = endDate.getText().trim();*/
 		
 		//Getting the list of results
 		obsList = Search.search_date(start, end);
@@ -102,7 +170,8 @@ public class SearchController {
 	 * Sets the listview to the results of the tag search
 	 */
 	public void searchTagClick() {
-		
+		tagListView.setItems(null);
+		imageView.setImage(null);
 		String tag = tagToSearch.getText();
 		
 		//If searching for two tags
@@ -140,7 +209,8 @@ public class SearchController {
 	}
 	
 	public void logoutClick(ActionEvent event) throws Exception {
-		
+		tagListView.setItems(null);
+		imageView.setImage(null);
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 

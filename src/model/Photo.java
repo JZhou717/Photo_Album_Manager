@@ -3,8 +3,11 @@ package model;
 
 import java.io.File;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +40,7 @@ public class Photo implements Serializable{
 		caption = "";
 		tag_list = FXCollections.observableArrayList();
 		date = Calendar.getInstance();
-			date.set(Calendar.MILLISECOND, 0);
+		date.set(Calendar.MILLISECOND, 0);
 		image = i;
 		
 	}
@@ -51,6 +54,7 @@ public class Photo implements Serializable{
             Image image = new Image(path);
             Photo photo = new Photo(image, path);
             photo.setName(file.getName());
+            photo.setDate(file.lastModified());
             return photo;
         }
         catch(Exception e) {
@@ -92,6 +96,11 @@ public class Photo implements Serializable{
 		return this.date;
 	}
 	
+	public void setDate(long lastMod) {
+		this.date.setTimeInMillis(lastMod);
+		this.date.set(Calendar.MILLISECOND,0);
+	}
+	
 	public Image getImage() {
 		return this.image;
 	}
@@ -100,9 +109,10 @@ public class Photo implements Serializable{
 		// TODO Auto-generated method stub
 		tag_list = FXCollections.observableArrayList(serializable_tag_list);
 		
-		File file = new File(filepath);
-    	String path = file.toURI().toString();
-        image = new Image(path);
+		
+    	
+    	
+        image = new Image(filepath);
 				
 	}
 	
@@ -138,9 +148,19 @@ public class Photo implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean in_date_range(String start, String end) {
+	public boolean in_date_range(LocalDate start, LocalDate end) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		
+		Date date = this.getDate().getTime();
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+	
+		if (start.compareTo(localDate) <= 0 && end.compareTo(localDate) >= 0) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 	
 	

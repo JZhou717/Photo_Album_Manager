@@ -2,7 +2,9 @@
 package view;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Optional;
 
 import javafx.collections.FXCollections;
@@ -29,6 +31,8 @@ public class OpenAlbumController {
 	@FXML
 	public Text captionText;
 	@FXML
+	public Text dateText;
+	@FXML
 	public ImageView imageView;
 	@FXML
 	public ListView<Photo> listView;
@@ -42,7 +46,8 @@ public class OpenAlbumController {
 	final FileChooser fileChooser = new FileChooser();
 	Stage stage;
 	public void logoutClick(ActionEvent event) throws Exception {
-		
+		tagListView.setItems(null);
+		imageView.setImage(null);
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
@@ -95,12 +100,15 @@ public class OpenAlbumController {
 	}
 	public void editCaptionClick() {
 		TextInputDialog tid = new TextInputDialog();
-		tid.setHeaderText("Caption");
+		tid.setHeaderText("Caption (Max 75 Characters)");
 		tid.setContentText("New Caption: ");
 		String result = tid.showAndWait().orElse(null);
 		if (result==null) {
 			return;
 		}
+		if (result.length() > 75) {
+        	result = result.substring(0, 75) + "...";
+        }
 		captionText.setText("Caption: " + result);
 		listView.getSelectionModel().getSelectedItem().editCaption(result);
 	}
@@ -155,12 +163,20 @@ public class OpenAlbumController {
         if (file != null) {
         	String path = file.toURI().toString();
             Image image = new Image(path);
+            
             imageView.setImage(image);
+           //file:/C:/Users/theck/Pictures/guitar.png
             //String photoName = file.getName();
             Photo photo = new Photo(image, path);
-           
+            photo.setDate(file.lastModified());
             photo.setName(file.getName());
-            //writing code here
+            Date date = photo.getDate().getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            dateText.setText("Photo from: " + sdf.format(date));
+            
+            captionText.setText("Caption: " + photo.getCaption());
+            //listView.getSelectionModel().select(PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).size()+1);
+            listView.getSelectionModel().clearSelection();
             Album album = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album());
             album.addPhoto(photo);
             
@@ -169,6 +185,7 @@ public class OpenAlbumController {
 	}
 	public void backClick() {
 		imageView.setImage(null);
+		tagListView.setItems(null);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
 	}
@@ -203,6 +220,10 @@ public class OpenAlbumController {
 			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
 			imageView.setImage(photo.getImage());
 			captionText.setText("Caption: " + photo.getCaption());
+			Date date = photo.getDate().getTime();
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+            dateText.setText("Photo from: " + sdf.format(date));
+			
 			tagListView.setItems(listView.getSelectionModel().getSelectedItem().get_tags());
 		}
 		
