@@ -56,10 +56,15 @@ public class SearchController {
 	 * Sets the listview to the results of the date search
 	 */
 	public void searchDateClick() {
-		String start = startDate.getText();
-		String end = endDate.getText();
+		String start = startDate.getText().trim();
+		String end = endDate.getText().trim();
 		
+		//Getting the list of results
+		obsList = Search.search_date(start, end);
 		
+		//Show the returned values
+		listView.setItems(obsList);
+		listView.getSelectionModel().select(0);
 	}
 	
 	/**
@@ -99,7 +104,7 @@ public class SearchController {
 		}
 		
 		//Show the returned values
-		listView.setItems(obsList);;
+		listView.setItems(obsList);
 		listView.getSelectionModel().select(0);
 	}
 	

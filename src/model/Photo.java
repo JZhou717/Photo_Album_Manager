@@ -125,6 +125,11 @@ public class Photo implements Serializable{
 	private String getFilePath() {
 		return filepath;
 	}
+
+	public boolean in_date_range(String start, String end) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 }

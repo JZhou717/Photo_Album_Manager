@@ -62,7 +62,29 @@ public class Search{
 		
 		return false;
 	}
+	
 
+	/**
+	 * Checks the format of the input dates and gets the list of results using {@link date_search_results()}
+	 * @param start The start of the date range
+	 * @param end The end of the date range
+	 * @return observable list of photos that were last modified within the date range
+	 */
+	public static ObservableList<Photo> search_date(String start, String end) {
+		
+		// Check the format of the date here
+		
+		
+		//format checked, getting actual results
+		return date_search_results(start, end);
+	}
+
+
+	/**
+	 * Parses the tag type and tag value and runs {@link #tag_search_results()} if the values are valid
+	 * @param tag the full tag value in the format of tag_type=tag_value
+	 * @return the observable list of photos of the results of the search
+	 */
 	public static ObservableList<Photo> search_tag(String tag) {
 		//Parse tag into tag type and tag_value
 		String tag_type;
@@ -97,7 +119,39 @@ public class Search{
 		}
 		
 		//Run the search and get a list of the photos with these tags
-		return Search.tag_search_results(tag_type, tag_value);
+		return tag_search_results(tag_type, tag_value);
+	}
+	
+	/**
+	 * Checks to see if the current user has any photos with last modified date between the input values
+	 * @param start the start of the range of dates to check
+	 * @param end the end of the range of dates to check
+	 * @return ObservableList of Photos that were last modified within the dates
+	 */
+	private static ObservableList<Photo> date_search_results(String start, String end) {
+		
+		ObservableList<Photo> ret = FXCollections.observableArrayList();
+		
+		User current_user = PhotosController.get_admin().getUserByName(PhotosController.get_user());
+		
+		Album album;
+		ObservableList<Album> user_albums = current_user.getAlbums();
+		Photo photo;
+		
+		//Going through each Album of the user
+		for(int i = 0; i < user_albums.size(); i++) {
+			album = user_albums.get(i);
+			//Going through each Photo in the Album
+			for(int j = 0; j < album.size(); j++) {
+				photo = album.getPhotoAt(j);
+				if(photo.in_date_range(start, end)) {
+					ret.add(photo);
+				}
+			}
+		}
+		
+		return ret;
+		
 	}
 	
 	/**
