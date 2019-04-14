@@ -48,6 +48,8 @@ public class UserAlbumController {
 	public void deleteAlbumClick() {
 		String name = albumInfo.getText();
 		PhotosController.admin.getUserByName(PhotosController.get_user()).removeAlbum(name);
+		albumInfo.setText("");
+		listView.getSelectionModel().clearSelection();
 		
 	}
 	public void editAlbumClick() {
@@ -67,6 +69,7 @@ public class UserAlbumController {
 		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name).rename(result);
 		int index = listView.getSelectionModel().getSelectedIndex();
 		obsList.set(index, PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumAt(index));
+		albumInfo.setText(result);
 		//update listview here
 	}
 	public void openAlbumClick() {

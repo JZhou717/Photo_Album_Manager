@@ -86,6 +86,8 @@ public class SearchController {
 	public void backClick(ActionEvent event) throws Exception {
 		tagListView.setItems(null);
 		imageView.setImage(null);
+		captionText.setText("Caption: ");
+		dateText.setText("Photo from: ");
 		PhotosController.user_album_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
@@ -211,6 +213,8 @@ public class SearchController {
 	public void logoutClick(ActionEvent event) throws Exception {
 		tagListView.setItems(null);
 		imageView.setImage(null);
+		captionText.setText("Caption: ");
+		dateText.setText("Photo from: ");
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 

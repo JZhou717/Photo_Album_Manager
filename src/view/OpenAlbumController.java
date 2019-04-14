@@ -46,6 +46,8 @@ public class OpenAlbumController {
 	final FileChooser fileChooser = new FileChooser();
 	Stage stage;
 	public void logoutClick(ActionEvent event) throws Exception {
+		captionText.setText("Caption: ");
+		dateText.setText("Photo from: ");
 		tagListView.setItems(null);
 		imageView.setImage(null);
 		PhotosController.stage.setScene(PhotosController.login_scene);
@@ -186,6 +188,8 @@ public class OpenAlbumController {
 	public void backClick() {
 		imageView.setImage(null);
 		tagListView.setItems(null);
+		captionText.setText("Caption: ");
+		dateText.setText("Photo from: ");
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
 	}
