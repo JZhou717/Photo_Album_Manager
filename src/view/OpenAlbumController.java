@@ -9,11 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -21,7 +17,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import javafx.stage.Popup;
 import javafx.stage.Stage;
 import model.Album;
 import model.Photo;
@@ -80,7 +75,6 @@ public class OpenAlbumController {
 		
 	}
 	public void copyToAlbumClick() {
-		int index = listView.getSelectionModel().getSelectedIndex();
 		//we need a listview to popup here
 		
 		ArrayList<String> albumList = new ArrayList<String>();
