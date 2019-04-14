@@ -41,7 +41,7 @@ public class User implements Serializable{
 	/**
 	 * List of preset tags that they can choose from or add to
 	 */
-	private ArrayList<String> tags = new ArrayList<String>(Arrays.asList("Location", "Person"));
+	private ArrayList<String> tags = new ArrayList<String>(Arrays.asList("New Type", "Location", "Person"));
 	/**
 	 * Constructor for a new user
 	 * @param name The string username needed to create the user

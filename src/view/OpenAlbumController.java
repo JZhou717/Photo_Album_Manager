@@ -38,6 +38,8 @@ public class OpenAlbumController {
 	@FXML
 	public ListView<Photo> listView;
 	@FXML
+	public ListView<Tag> tagListView;
+	@FXML
 	public ListView<Album> albumListView;
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	private ObservableList<Album> albumObsList = FXCollections.observableArrayList();
@@ -112,17 +114,42 @@ public class OpenAlbumController {
 		
 	}
 	public void addTagClick() {
-		Alert alert = new Alert(AlertType.CONFIRMATION);
+		
+		String type;
 		
 		ArrayList<String> tagList = PhotosController.admin.getUserByName(PhotosController.get_user()).getTags();
 		
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(tagList.get(0), tagList);
 		dialog.setTitle("Tagger");
-		dialog.setHeaderText("Choose type from list or select 'New Tag':");
+		dialog.setHeaderText("Choose type from list or select 'New Type':");
 		//ButtonType buttonTypeNew = new ButtonType("New Tag");
 		//alert.getButtonTypes().setAll(buttonTypeNew);
 		Optional<String> result = dialog.showAndWait();
-		
+		if (!result.isPresent()){
+			return;
+		}
+		if (result.get().equals("New Type")) {
+			TextInputDialog tid = new TextInputDialog();
+			tid.setHeaderText("Tag Type");
+			tid.setContentText("New Tag Type: ");
+			String res = tid.showAndWait().orElse(null);
+			if (res==null) {
+				return;
+			}
+			PhotosController.admin.getUserByName(PhotosController.get_user()).addTag(res);
+			type = res;
+			
+		}else {
+			type = result.get();
+		}
+		TextInputDialog tid = new TextInputDialog();
+		tid.setHeaderText("Tag Value");
+		tid.setContentText("Value: ");
+		String val = tid.showAndWait().orElse(null);
+		if (val==null) {
+			return;
+		}
+		listView.getSelectionModel().getSelectedItem().addTag(type, val);
 	}
 	public void selectPhotoClick() {
 		//this one is to add photos
@@ -153,6 +180,7 @@ public class OpenAlbumController {
 		//obsList.add(new Album("TOM"));
 		listView.setItems(obsList);
 		
+		
 		//listener
 		listView
 			.getSelectionModel()
@@ -172,6 +200,7 @@ public class OpenAlbumController {
 			Photo photo = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).getPhotoAt(index);
 			imageView.setImage(photo.getImage());
 			captionText.setText("Caption: " + photo.getCaption());
+			tagListView.setItems(listView.getSelectionModel().getSelectedItem().get_tags());
 		}
 		
 	}

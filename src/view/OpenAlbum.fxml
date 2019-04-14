@@ -32,7 +32,7 @@
                   <Button onAction="#copyToAlbumClick" layoutX="434.0" layoutY="380.0" mnemonicParsing="false" text="Copy to Album" />
                   <Text fx:id="captionText" layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="152.99999779462814" />
                   <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" />
-                  <ListView layoutX="60.0" layoutY="482.0" prefHeight="107.0" prefWidth="200.0" />
+                  <ListView fx:id="tagListView" layoutX="60.0" layoutY="482.0" prefHeight="107.0" prefWidth="200.0" />
                   <Text layoutX="60.0" layoutY="470.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tags:" wrappingWidth="152.99999779462814" />
                   <Button onAction="#deleteTagClick" layoutX="273.0" layoutY="489.0" mnemonicParsing="false" text="Delete Selected Tag" />
                   <Button onAction="#addTagClick" layoutX="329.0" layoutY="574.0" mnemonicParsing="false" text="Add Tag" />
