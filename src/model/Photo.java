@@ -34,6 +34,7 @@ public class Photo implements Serializable{
 	private transient Image image;
 	private String filepath;
 	private String name;
+	private boolean hasLocation = false;
 	
 	public Photo(Image i, String path) {
 		this.filepath = path;
@@ -44,7 +45,9 @@ public class Photo implements Serializable{
 		image = i;
 		
 	}
-	
+	public boolean getLocation() {
+		return this.hasLocation;
+	}
 	public static Photo create_photo_by_path(String filepath) {
 		
 		try {
@@ -161,6 +164,36 @@ public class Photo implements Serializable{
 			return false;
 		}
 		
+	}
+	public boolean older(Photo com) {
+		Date date = this.getDate().getTime();
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Date comDate = com.getDate().getTime();
+		LocalDate comLocalDate = comDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		if (localDate.compareTo(comLocalDate) <= 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public boolean newer(Photo com) {
+		Date date = this.getDate().getTime();
+		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		Date comDate = com.getDate().getTime();
+		LocalDate comLocalDate = comDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		if (localDate.compareTo(comLocalDate) >= 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public void setLocation() {
+		
+		if (this.hasLocation == false) {
+			this.hasLocation = true;
+		}else {
+			this.hasLocation = false;
+		}
 	}
 	
 	

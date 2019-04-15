@@ -11,15 +11,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceDialog;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.Album;
 import model.Photo;
 import model.Tag;
@@ -115,6 +120,14 @@ public class OpenAlbumController {
 		listView.getSelectionModel().getSelectedItem().editCaption(result);
 	}
 	public void deleteTagClick() {
+		if (tagListView.getSelectionModel().getSelectedItem() == null) {
+			return;
+		}
+		
+		if (tagListView.getSelectionModel().getSelectedItem().getName().equals("Location")){
+			listView.getSelectionModel().getSelectedItem().setLocation();
+		}
+		
 		listView.getSelectionModel().getSelectedItem().deleteTag(tagListView.getSelectionModel().getSelectedItem());
 		
 	}
@@ -133,12 +146,23 @@ public class OpenAlbumController {
 		if (!result.isPresent()){
 			return;
 		}
+		
+		if (result.get().equals("Location") && listView.getSelectionModel().getSelectedItem().getLocation() == true) {
+			Alert alert = new Alert(AlertType.ERROR, "Cannot have more than one Location", ButtonType.OK);
+			alert.show();
+			return;
+		}
 		if (result.get().equals("New Type")) {
 			TextInputDialog tid = new TextInputDialog();
 			tid.setHeaderText("Tag Type");
 			tid.setContentText("New Tag Type: ");
 			String res = tid.showAndWait().orElse(null);
 			if (res==null) {
+				return;
+			}
+			if (res.equals("Location") && listView.getSelectionModel().getSelectedItem().getLocation() == true) {
+				Alert alert = new Alert(AlertType.ERROR, "Cannot have more than one Location", ButtonType.OK);
+				alert.show();
 				return;
 			}
 			if (!PhotosController.admin.getUserByName(PhotosController.get_user()).getTags().contains(res)) {
@@ -156,6 +180,10 @@ public class OpenAlbumController {
 		String val = tid.showAndWait().orElse(null);
 		if (val==null) {
 			return;
+		}
+		if (result.get().equals("Location")) {
+			
+			listView.getSelectionModel().getSelectedItem().setLocation();
 		}
 		listView.getSelectionModel().getSelectedItem().addTag(type, val);
 	}
@@ -190,8 +218,33 @@ public class OpenAlbumController {
 		tagListView.setItems(null);
 		captionText.setText("Caption: ");
 		dateText.setText("Photo from: ");
+		PhotosController.user_album_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
+	}
+	public void rightClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
+		int index = listView.getSelectionModel().getSelectedIndex();
+		if (index + 1 > obsList.size()) {
+			listView.getSelectionModel().select(0);
+		}else {
+			listView.getSelectionModel().select(index + 1);
+		}
+		
+	}
+	public void leftClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
+		int index = listView.getSelectionModel().getSelectedIndex();
+		if (index - 1  < 0) {
+			listView.getSelectionModel().select(obsList.size());
+		}else {
+			listView.getSelectionModel().select(index - 1);
+		}
+		
 	}
 	public void init(Stage mainStage) {
 		
@@ -201,7 +254,24 @@ public class OpenAlbumController {
 		albumObsList = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbums();
 		//obsList.add(new Album("TOM"));
 		listView.setItems(obsList);
-		
+		listView.setCellFactory(param -> new ListCell<Photo>() {
+            private ImageView imageView = new ImageView();
+            @Override
+            public void updateItem(Photo name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(name.getImage());
+                    imageView.setFitHeight(75);
+                    
+                    imageView.setPreserveRatio(true);
+                    setText(name.toString());
+                    setGraphic(imageView);
+                }
+            }
+        });
 		
 		//listener
 		listView
@@ -232,6 +302,19 @@ public class OpenAlbumController {
 		}
 		
 	}
+	/*
+	static class ColorRectCell extends ListCell<String> {
+        @Override
+        public void updateItem(String item, boolean empty) {
+            super.updateItem(item, empty);
+            ImageView rect = new ImageView();
+            if (item != null) {
+                rect.setImage(item);
+                setGraphic(rect);
+            }
+        }
+    }*/
+    
 	
 	
 	

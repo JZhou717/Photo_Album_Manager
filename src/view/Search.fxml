@@ -28,7 +28,9 @@
             <AnchorPane layoutX="402.0" layoutY="14.0" prefHeight="638.0" prefWidth="622.0" style="-fx-border-color: #000000;">
                <children>
                   <Text fx:id="dateText" layoutX="71.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Photo from: " wrappingWidth="435.99999779462814" />
-                  <ImageView fx:id="imageView" fitHeight="302.0" fitWidth="483.0" layoutX="71.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageView" fitHeight="302.0" fitWidth="408.0" layoutX="108.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true" />
+                  <Button onAction="#leftClick" layoutX="55.0" layoutY="150.0" mnemonicParsing="false" text="Back" />
+                  <Button onAction="#rightClick" layoutX="565.0" layoutY="150.0" mnemonicParsing="false" text="Forward" />
                   <Text fx:id="captionText" layoutX="71.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption:" wrappingWidth="370" />
                   <!-- 
                   <Button onAction="#editCaptionClick" layoutX="444.0" layoutY="345.0" mnemonicParsing="false" text="Edit Caption" /> -->

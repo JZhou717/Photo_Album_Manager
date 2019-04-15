@@ -107,6 +107,10 @@ public class UserAlbumController {
 		listView.getSelectionModel().select(0);
 		
 		albumInfo.setEditable(false);
+		for (int i=0;i<obsList.size();i++) {
+			obsList.set(i, PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumAt(i));
+		}
+		
 	}
 	
 	private void showItemInputDialog(Stage mainStage) {

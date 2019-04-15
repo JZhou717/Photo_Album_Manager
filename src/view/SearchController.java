@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
@@ -53,6 +54,24 @@ public class SearchController {
 		o.addAll("No Filter", "jpg", "png", "gif");
 		typeFilter.getItems().addAll(o);
 		typeFilter.setValue("No Filter");
+		listView.setCellFactory(param -> new ListCell<Photo>() {
+            private ImageView imageView = new ImageView();
+            @Override
+            public void updateItem(Photo name, boolean empty) {
+                super.updateItem(name, empty);
+                if (empty) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    imageView.setImage(name.getImage());
+                    imageView.setFitHeight(75);
+                    
+                    imageView.setPreserveRatio(true);
+                    setText(name.toString());
+                    setGraphic(imageView);
+                }
+            }
+        });
 		
 		//listener
 		listView
@@ -98,6 +117,30 @@ public class SearchController {
 		Stage mainWindow = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		mainWindow.setScene(newScene);
 		*/
+		
+	}
+	public void rightClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
+		int index = listView.getSelectionModel().getSelectedIndex();
+		if (index + 1 > obsList.size()) {
+			listView.getSelectionModel().select(0);
+		}else {
+			listView.getSelectionModel().select(index + 1);
+		}
+		
+	}
+	public void leftClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
+		int index = listView.getSelectionModel().getSelectedIndex();
+		if (index -1  < 0) {
+			listView.getSelectionModel().select(obsList.size());
+		}else {
+			listView.getSelectionModel().select(index - 1);
+		}
 		
 	}
 	

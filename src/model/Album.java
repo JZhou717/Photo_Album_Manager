@@ -2,7 +2,9 @@ package model;
 
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -64,6 +66,7 @@ public class Album implements Serializable{
 	public void addPhoto(Photo newPhoto){
 		myPhotos.add(newPhoto);
 		size++;
+		
 	}
 	
 	public void deletePhotoAt(int i) {
@@ -73,7 +76,10 @@ public class Album implements Serializable{
 	}
 	
 	public String toString() {
-		return this.name;
+		Date newDate = this.getNewest().getDate().getTime();
+		Date oldDate = this.getOldest().getDate().getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+		return this.name + "\nSize: " + this.size + "\nRange: "+ sdf.format(oldDate) + "-" + sdf.format(newDate);
 	}
 
 	
@@ -92,7 +98,30 @@ public class Album implements Serializable{
 		}
 		
 	}
-	
+	public Photo getOldest() {
+		if (myPhotos.size()<1) {
+			return null;
+		}
+		Photo oldest = myPhotos.get(0);
+		for (int i=0; i<myPhotos.size();i++) {
+			if (myPhotos.get(i).older(oldest)) {
+				oldest = myPhotos.get(i);
+			}
+		}
+		return oldest;
+	}
+	public Photo getNewest() {
+		if (myPhotos.size()<1) {
+			return null;
+		}
+		Photo newest = myPhotos.get(0);
+		for (int i=0; i<myPhotos.size();i++) {
+			if (myPhotos.get(i).newer(newest)) {
+				newest = myPhotos.get(i);
+			}
+		}
+		return newest;
+	}
 	public void serialize() {
 		// TODO Auto-generated method stub
 		serializable_photo_list = new ArrayList<Photo>(myPhotos);
