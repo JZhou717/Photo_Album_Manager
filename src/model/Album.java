@@ -136,6 +136,9 @@ public class Album implements Serializable{
 	 * Gives a string of this album's size, and range of dates from the date on the photo least recently modified to the date on the one most recently modified
 	 */
 	public String toString() {
+		if (this.myPhotos.size()<1) {
+			return this.name + "\nSize: 0";
+		}
 		Date newDate = this.getNewest().getDate().getTime();
 		Date oldDate = this.getOldest().getDate().getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");

@@ -90,15 +90,28 @@ public class OpenAlbumController {
 	 * The action associated with the delete button for the photo. Removes the photo from the album
 	 */
 	public void deletePhotoClick() {
-		
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
 		int index = listView.getSelectionModel().getSelectedIndex();
 		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);
+		if (obsList.size() > 0) {
+			
+			listView.getSelectionModel().clearSelection();
+			listView.getSelectionModel().select(0);
+		}else {
+			imageView.setImage(null);
+		}
+		
 	}
 	
 	/**
 	 * The action associated with the move button for the photo. Moves the photo from this album to the one selected
 	 */
 	public void moveToAlbumClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
 		int index = listView.getSelectionModel().getSelectedIndex();
 		//we need a listview to popup here
 		
@@ -109,6 +122,11 @@ public class OpenAlbumController {
 				continue;
 			}
 			albumList.add(temp);
+		}
+		if (albumList.size() < 1) {
+			Alert alert = new Alert(AlertType.ERROR, "No other albums to move to", ButtonType.OK);
+			alert.show();
+			return;
 		}
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(albumList.get(0).toString(), albumList);
 		dialog.setTitle("Mover");
@@ -126,7 +144,9 @@ public class OpenAlbumController {
 	 */
 	public void copyToAlbumClick() {
 		//we need a listview to popup here
-		
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
 		ArrayList<String> albumList = new ArrayList<String>();
 		for (int i=0;i<albumObsList.size();i++) {
 			String temp = albumObsList.get(i).getName();
@@ -134,6 +154,11 @@ public class OpenAlbumController {
 				continue;
 			}
 			albumList.add(temp);
+		}
+		if (albumList.size() < 1) {
+			Alert alert = new Alert(AlertType.ERROR, "No other albums to copy to", ButtonType.OK);
+			alert.show();
+			return;
 		}
 		ChoiceDialog<String> dialog = new ChoiceDialog<String>(albumList.get(0).toString(), albumList);
 		dialog.setTitle("Mover");
@@ -148,6 +173,9 @@ public class OpenAlbumController {
 	 * Action associated with the edit caption button
 	 */
 	public void editCaptionClick() {
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
 		TextInputDialog tid = new TextInputDialog();
 		tid.setHeaderText("Caption (Max 75 Characters)");
 		tid.setContentText("New Caption: ");
@@ -182,7 +210,9 @@ public class OpenAlbumController {
 	 * Action associated with adding a tag
 	 */
 	public void addTagClick() {
-		
+		if (listView.getSelectionModel().getSelectedItem()==null) {
+			return;
+		}
 		String type;
 		
 		ArrayList<String> tagList = PhotosController.admin.getUserByName(PhotosController.get_user()).getTags();
@@ -263,6 +293,7 @@ public class OpenAlbumController {
             listView.getSelectionModel().clearSelection();
             Album album = PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album());
             album.addPhoto(photo);
+            listView.getSelectionModel().select(obsList.size() -1);
             
         }
 		
@@ -352,7 +383,9 @@ public class OpenAlbumController {
 				(obs, oldVal, newVal) ->
 					showItemInputDialog(mainStage));
 		listView.getSelectionModel().select(0);
-		
+		if (listView.getSelectionModel().getSelectedItem()!=null) {
+			imageView.setImage(listView.getSelectionModel().getSelectedItem().getImage());
+		}
 		
 		
 		

@@ -82,8 +82,10 @@ public class UserAlbumController {
 	public void editAlbumClick() {
 		String name = albumInfo.getText();
 		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
+			/*
 			Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);
 			alert.show();
+			*/
 			return;
 		}
 		TextInputDialog tid = new TextInputDialog();
@@ -108,8 +110,10 @@ public class UserAlbumController {
 		newAlbumName.setText("");
 		String name = albumInfo.getText();
 		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
+			/*
 			Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);
 			alert.show();
+			*/
 			return;
 		}else {
 			PhotosController.set_album(name);

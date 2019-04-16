@@ -147,7 +147,7 @@ public class User implements Serializable{
 				return;
 			}
 		}
-		Alert alert = new Alert(AlertType.ERROR, "Abum does not exist", ButtonType.OK);
+		Alert alert = new Alert(AlertType.ERROR, "Album does not exist", ButtonType.OK);
 		alert.show();
 		return;
 	}

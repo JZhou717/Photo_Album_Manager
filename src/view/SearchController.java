@@ -10,12 +10,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -226,6 +229,11 @@ public class SearchController {
 	 * Sets the listview to the results of the date search
 	 */
 	public void searchDateClick() {
+		if (startDate.getValue()==null|| endDate.getValue()==null) {
+			Alert alert = new Alert(AlertType.ERROR, "Please enter a start and an end date", ButtonType.OK);
+			alert.show();
+			return;
+		}
 		tagListView.setItems(null);
 		imageView.setImage(null);
 		LocalDate start = startDate.getValue();
