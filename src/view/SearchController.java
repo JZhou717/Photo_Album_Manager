@@ -58,6 +58,7 @@ public class SearchController {
 	 */
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	
+	
 	/**
 	 * Boots up the search page to be ready to use
 	 * @param mainStage
@@ -66,9 +67,14 @@ public class SearchController {
 		
 		listView.setItems(obsList);
 		ObservableList<String> o =  FXCollections.observableArrayList();
+		
 		o.addAll("No Filter", "jpg", "png", "gif");
-		typeFilter.getItems().addAll(o);
-		typeFilter.setValue("No Filter");
+		if (typeFilter.getItems().size()<1) {
+			typeFilter.getItems().addAll(o);
+			typeFilter.setValue("No Filter");
+		}
+		
+		
 		listView.setCellFactory(param -> new ListCell<Photo>() {
             private ImageView imageView = new ImageView();
             @Override
@@ -95,6 +101,7 @@ public class SearchController {
 			.addListener(
 				(obs, oldVal, newVal) ->
 					showItemInputDialog(mainStage));
+		listView.getSelectionModel().clearSelection();
 		listView.getSelectionModel().select(0);
 		
 		
@@ -182,11 +189,18 @@ public class SearchController {
 		
 		String name = typeFilter.getValue();
 		
-		
-		if (name.equals("No Filter")) {
-			return;
-		}
 		ObservableList<Photo> filterList = FXCollections.observableArrayList();
+		if (name.equals("No Filter")) {
+			for (int i=0;i<obsList.size();i++) {
+			
+					
+				filterList.add(obsList.get(i));
+				
+			
+			
+			}
+		}
+		
 		if (name.equals("jpg")) {
 			
 			for (int i=0;i<obsList.size();i++) {

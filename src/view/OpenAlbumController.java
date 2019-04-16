@@ -382,17 +382,16 @@ public class OpenAlbumController {
 			.addListener(
 				(obs, oldVal, newVal) ->
 					showItemInputDialog(mainStage));
+		listView.getSelectionModel().clearSelection();
 		listView.getSelectionModel().select(0);
-		if (listView.getSelectionModel().getSelectedItem()!=null) {
-			imageView.setImage(listView.getSelectionModel().getSelectedItem().getImage());
-		}
+		
 		
 		
 		
 	}
 	
 	/**
-	 * The listener for this page's listvie
+	 * The listener for this page's listview
 	 * @param mainStage
 	 */
 	private void showItemInputDialog(Stage mainStage) {
