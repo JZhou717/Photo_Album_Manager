@@ -241,6 +241,11 @@ public class Search{
 		
 	}
 
+	/**
+	 * Checks to see if the album indicated by the name given in the parameter exists for the current user
+	 * @param n the name of the album to check
+	 * @return true if the album exists, false if not
+	 */
 	private static boolean album_exists(String n) {
 		
 		String name = n.trim();

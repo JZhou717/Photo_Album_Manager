@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 
 /**
  * This data structure represents a photo
- * @author Jake
+ * @author Tom, Jake
  *
  */
 
@@ -27,15 +27,51 @@ public class Photo implements Serializable{
 	 */
 	private static final long serialVersionUID = 4246464515728856009L;
 	
+	/**
+	 * The caption for this photo
+	 */
 	private String caption;
+	
+	/**
+	 * The observable list of tags for this photo
+	 */
 	private transient ObservableList<Tag> tag_list;
+	
+	/**
+	 * The list of tags used to save the observable list on serialization and on bootup
+	 */
 	private ArrayList<Tag> serializable_tag_list;
+	
+	/**
+	 * The date this image was last modified
+	 */
 	private Calendar date;
+	
+	/**
+	 * The image the Photo stores
+	 */
 	private transient Image image;
+	
+	/**
+	 * The filepath of the image, necessary to retrieve the image on bootup
+	 */
 	private String filepath;
+	
+	/**
+	 * The name of the photo
+	 */
 	private String name;
+	
+	/**
+	 * Flag to see if the photo has a location
+	 */
 	private boolean hasLocation = false;
 	
+	/**
+	 * Creates an instance of the photo given an image and the filepath to where it's stored
+	 * @param i the image to add to the photo
+	 * @param path the path the image came from
+	 */
 	public Photo(Image i, String path) {
 		this.filepath = path;
 		caption = "";
@@ -45,9 +81,20 @@ public class Photo implements Serializable{
 		image = i;
 		
 	}
+	
+	/**
+	 * checks to see if this photo already has a location
+	 * @return true if so, false otherwise
+	 */
 	public boolean getLocation() {
 		return this.hasLocation;
 	}
+	
+	/**
+	 * Creates a new photo instance from the given filepath
+	 * @param filepath where the image is
+	 * @return Photo instance of the newly created photo
+	 */
 	public static Photo create_photo_by_path(String filepath) {
 		
 		try {
@@ -75,50 +122,87 @@ public class Photo implements Serializable{
 		return this.tag_list;
 	}
 	
+	/**
+	 * Set the filepath where this image is stored
+	 * @param path the path of the image
+	 */
 	public void set_filepath(String path) {
 		filepath = path;
 	}
 	
+	/**
+	 * Retrieves this photo's caption
+	 * @return
+	 */
 	public String getCaption() {
 		return this.caption;
 	}
 	
+	/**
+	 * Adds a tag to this photo
+	 * @param name of the tag
+	 * @param value of the tag
+	 */
 	public void addTag(String name, String value) {
 		tag_list.add(new Tag(name, value));
 	}
 	
+	/**
+	 * Removes a tag given its instance
+	 * @param tag the tag to remove
+	 */
 	public void deleteTag(Tag tag) {
 		tag_list.remove(tag);
 	}
 	
+	/**
+	 * Edits the caption to the input
+	 * @param newCaption the new caption
+	 */
 	public void editCaption(String newCaption) {
 		caption = newCaption;
 	}
 	
+	/**
+	 * Retrieves the date of the photo
+	 * @return date
+	 */
 	public Calendar getDate() {
 		return this.date;
 	}
 	
+	/**
+	 * Sets the date of the photo
+	 * @param lastMod the millisecond representation of the photo's date
+	 */
 	public void setDate(long lastMod) {
 		this.date.setTimeInMillis(lastMod);
 		this.date.set(Calendar.MILLISECOND,0);
 	}
 	
+	/**
+	 * Retrieves the image the photo stores
+	 * @return
+	 */
 	public Image getImage() {
 		return this.image;
 	}
 
+	/**
+	 * Take the list of tags back from the array list into the observable list
+	 * Grabs the image from the file path
+	 */
 	public void retrieve_serialized_data() {
 		// TODO Auto-generated method stub
 		tag_list = FXCollections.observableArrayList(serializable_tag_list);
-		
-		
-    	
     	
         image = new Image(filepath);
 				
 	}
 	
+	/**
+	 * Save the observable list of tags into an array list of tags
+	 */
 	public void serialize() {
 		// TODO Auto-generated method stub
 		serializable_tag_list = new ArrayList<Tag>(tag_list);
@@ -145,12 +229,28 @@ public class Photo implements Serializable{
 	public String getFilePath() {
 		return filepath;
 	}
+	
+	/**
+	 * returns the name of the photo
+	 */
 	public String toString() {
 		return name;
 	}
+	
+	/**
+	 * Set the name of the photo to the input
+	 * @param name the new name of the photo
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	/**
+	 * Check if this photo is in the given date range
+	 * @param start the start of the range
+	 * @param end the end of the range
+	 * @return true if so, false otherwise
+	 */
 	public boolean in_date_range(LocalDate start, LocalDate end) {
 		// TODO Auto-generated method stub
 		
@@ -165,6 +265,12 @@ public class Photo implements Serializable{
 		}
 		
 	}
+	
+	/**
+	 * Checks to see if the input photo is older than the photo calling this function
+	 * @param com the Photo to compare to
+	 * @return true if so, false otherwise
+	 */
 	public boolean older(Photo com) {
 		Date date = this.getDate().getTime();
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -176,6 +282,12 @@ public class Photo implements Serializable{
 			return false;
 		}
 	}
+	
+	/**
+	 * Checks to see if the input photo is newer than the photo calling this function
+	 * @param com the Photo to compare to
+	 * @return true if so, false otherwise
+	 */
 	public boolean newer(Photo com) {
 		Date date = this.getDate().getTime();
 		LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -187,6 +299,10 @@ public class Photo implements Serializable{
 			return false;
 		}
 	}
+	
+	/**
+	 * Change the hasLocation flag of this photo to the opposite
+	 */
 	public void setLocation() {
 		
 		if (this.hasLocation == false) {

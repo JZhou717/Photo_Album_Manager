@@ -14,7 +14,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Album;
 
-
+/**
+ * The controller for the User Album page
+ * @author Tom
+ *
+ */
 public class UserAlbumController {
 	@FXML
 	public TextField newAlbumName;
@@ -27,24 +31,43 @@ public class UserAlbumController {
 	//observable list of albums
 	private ObservableList<Album> obsList = FXCollections.observableArrayList();
 	
+	/**
+	 * Goes back to the login page after saving data
+	 * @param event
+	 * @throws Exception
+	 */
 	public void logoutClick(ActionEvent event) throws Exception {
 		albumInfo.setText("");
 		newAlbumName.setText("");
+		PhotosController.serialize();
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
 	}
-	public void goToSearchClick(ActionEvent event) throws Exception {
+	
+	/**
+	 * Goes to the search page
+	 * @param event that comes from the button click
+	 */
+	public void goToSearchClick(ActionEvent event){
 		
 		newAlbumName.setText("");
 		PhotosController.search_controller.init(PhotosController.stage);
 		PhotosController.stage.setScene(PhotosController.search_scene);
 		PhotosController.stage.show();
 	}
+	
+	/**
+	 * Create a new album for this user
+	 */
 	public void createAlbumClick() {
 		String name = newAlbumName.getText();
 		PhotosController.admin.getUserByName(PhotosController.get_user()).addAlbum(name);
 	}
+	
+	/**
+	 * Delete an album this user has
+	 */
 	public void deleteAlbumClick() {
 		String name = albumInfo.getText();
 		PhotosController.admin.getUserByName(PhotosController.get_user()).removeAlbum(name);
@@ -52,6 +75,10 @@ public class UserAlbumController {
 		listView.getSelectionModel().clearSelection();
 		
 	}
+	
+	/**
+	 * Edit the name of an existing album
+	 */
 	public void editAlbumClick() {
 		String name = albumInfo.getText();
 		if (PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name)==null) {
@@ -72,6 +99,10 @@ public class UserAlbumController {
 		albumInfo.setText(result);
 		//update listview here
 	}
+	
+	/**
+	 * Goes to the open album page for the selected album
+	 */
 	public void openAlbumClick() {
 		
 		newAlbumName.setText("");
@@ -89,6 +120,11 @@ public class UserAlbumController {
 		
 		
 	}
+	
+	/**
+	 * Boots up the user album page to be ready for use
+	 * @param mainStage
+	 */
 	public void init(Stage mainStage) {
 		
 		//Populating the list
@@ -112,7 +148,10 @@ public class UserAlbumController {
 		}
 		
 	}
-	
+	/**
+	 * The listener for the listview for the list of albums on this page
+	 * @param mainStage the stage this listener is on
+	 */
 	private void showItemInputDialog(Stage mainStage) {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();

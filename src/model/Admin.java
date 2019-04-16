@@ -19,6 +19,7 @@ import view.PhotosController;
 
 /**
  * This data structure holds the list of Users in the system
+ * It is also used to populate the listview of users on the admin system
  * @author Jake
  *
  */
@@ -45,12 +46,16 @@ public class Admin implements Serializable{
 	 */
 	public static final String storeFile = "Admin.dat";
 	
+	/**
+	 * Returns the list of users when the controller asks for it
+	 * @return ObservableList of Users for the controller
+	 */
 	public ObservableList<User> populateUserList() {
 		return user_list;
 	}
 	
 	/**
-	 * Creates a new Admin instance
+	 * Creates a new Admin instance. Creates a new instance of the observable list and adds the admin to it. Admin should only be created the first time the application boots up since Admin will be retrieved from serialized data if it exists
 	 */
 	public Admin() {
 		if(user_list == null) {
@@ -139,6 +144,11 @@ public class Admin implements Serializable{
 		return user_list.get(index);
 	}
 	
+	/**
+	 * Searches the observable list of users and returns the one with the name given, if they exist
+	 * @param n The name of the user to find
+	 * @return User instance associated with the given name
+	 */
 	public User getUserByName(String n) {
 		
 		String name = n.toLowerCase().trim();
@@ -168,12 +178,16 @@ public class Admin implements Serializable{
 		
 	}
 	
+	/**
+	 * Retrives the list only used when serializing since the observable list usually used isn't serializable
+	 * @return ArrayList of users stored during serialization
+	 */
 	public ArrayList<User> get_saved_list() {
 		return serializable_user_list;
 	}
 	
-	/*
-	 * Reads the serialized data back into the program
+	/**
+	 * Reads the serialized data back into the program. Places the user list back from the ArrayList used to store it to the observable list normally used
 	 * @throws IOException if something is wrong with the file we are trying to access
 	 * @throws ClassNotFoundExceptin if something is wrong with a model we are trying to read
 	 */

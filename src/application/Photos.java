@@ -6,10 +6,14 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import view.PhotosController;
 
-
+/**
+ * The application boots starting at this page. This application is a photo-album manager that supports multiple users where new users may be added through the admin system. Users can add photos to albums and search for photos with certain tags or within certain dates.
+ * @author Tom, Jake
+ *
+ */
 public class Photos extends Application {
 	/**
-	 * Bootup on start
+	 * Bootup on start. Calls the main controller's {@link #PhotosController.start()} function
 	 */
 	@Override
 	public void start(Stage primaryStage) {

@@ -29,7 +29,11 @@ import model.Album;
 import model.Photo;
 import model.Tag;
 
-
+/**
+ * This is the controller associated with the page that displays the photos inside of an opened album
+ * @author Jake
+ *
+ */
 public class OpenAlbumController {
 	@FXML
 	public TextField tagToAddText;
@@ -45,25 +49,55 @@ public class OpenAlbumController {
 	public ListView<Tag> tagListView;
 	@FXML
 	public ListView<Album> albumListView;
+	
+	/**
+	 * The list of Photos for this album
+	 */
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
+	
+	/**
+	 * List of albums this album can be moved to
+	 */
 	private ObservableList<Album> albumObsList = FXCollections.observableArrayList();
 
+	/**
+	 * File chooser to add new photo to the album through
+	 */
 	final FileChooser fileChooser = new FileChooser();
+	
+	/**
+	 * Holds the stage
+	 */
 	Stage stage;
+	
+	/**
+	 * Saves the current user's data and goes to the login page
+	 * @param event
+	 * @throws Exception
+	 */
 	public void logoutClick(ActionEvent event) throws Exception {
 		captionText.setText("Caption: ");
 		dateText.setText("Photo from: ");
 		tagListView.setItems(null);
 		imageView.setImage(null);
+		PhotosController.serialize();
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
 	}
+	
+	/**
+	 * The action associated with the delete button for the photo. Removes the photo from the album
+	 */
 	public void deletePhotoClick() {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();
 		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(PhotosController.get_album()).deletePhotoAt(index);
 	}
+	
+	/**
+	 * The action associated with the move button for the photo. Moves the photo from this album to the one selected
+	 */
 	public void moveToAlbumClick() {
 		int index = listView.getSelectionModel().getSelectedIndex();
 		//we need a listview to popup here
@@ -86,6 +120,10 @@ public class OpenAlbumController {
 		}
 		
 	}
+	
+	/**
+	 * The action associated with the copy button for the photo. Copies this photo to the album selected
+	 */
 	public void copyToAlbumClick() {
 		//we need a listview to popup here
 		
@@ -105,6 +143,10 @@ public class OpenAlbumController {
 			PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(result.get()).addPhoto(listView.getSelectionModel().getSelectedItem());
 		}
 	}
+	
+	/**
+	 * Action associated with the edit caption button
+	 */
 	public void editCaptionClick() {
 		TextInputDialog tid = new TextInputDialog();
 		tid.setHeaderText("Caption (Max 75 Characters)");
@@ -119,6 +161,10 @@ public class OpenAlbumController {
 		captionText.setText("Caption: " + result);
 		listView.getSelectionModel().getSelectedItem().editCaption(result);
 	}
+	
+	/**
+	 * Action associated with delete tag button
+	 */
 	public void deleteTagClick() {
 		if (tagListView.getSelectionModel().getSelectedItem() == null) {
 			return;
@@ -131,6 +177,10 @@ public class OpenAlbumController {
 		listView.getSelectionModel().getSelectedItem().deleteTag(tagListView.getSelectionModel().getSelectedItem());
 		
 	}
+	
+	/**
+	 * Action associated with adding a tag
+	 */
 	public void addTagClick() {
 		
 		String type;
@@ -187,6 +237,10 @@ public class OpenAlbumController {
 		}
 		listView.getSelectionModel().getSelectedItem().addTag(type, val);
 	}
+	
+	/**
+	 * Action associated with adding a new photo to the album with the user of the filechooser
+	 */
 	public void selectPhotoClick() {
 		//this one is to add photos
 		File file = fileChooser.showOpenDialog(stage);
@@ -213,6 +267,10 @@ public class OpenAlbumController {
         }
 		
 	}
+	
+	/**
+	 * Goes back to the user album view
+	 */
 	public void backClick() {
 		imageView.setImage(null);
 		tagListView.setItems(null);
@@ -222,6 +280,10 @@ public class OpenAlbumController {
 		PhotosController.stage.setScene(PhotosController.user_album_scene);
 		PhotosController.stage.show();
 	}
+	
+	/**
+	 * Goes right on the view of the photos
+	 */
 	public void rightClick() {
 		if (listView.getSelectionModel().getSelectedItem()==null) {
 			return;
@@ -234,6 +296,10 @@ public class OpenAlbumController {
 		}
 		
 	}
+	
+	/**
+	 * Goes left on the view of the photos
+	 */
 	public void leftClick() {
 		if (listView.getSelectionModel().getSelectedItem()==null) {
 			return;
@@ -246,6 +312,11 @@ public class OpenAlbumController {
 		}
 		
 	}
+	
+	/**
+	 * Boots up this screen when it is transitioned to
+	 * @param mainStage
+	 */
 	public void init(Stage mainStage) {
 		
 		//Populating the list
@@ -286,6 +357,11 @@ public class OpenAlbumController {
 		
 		
 	}
+	
+	/**
+	 * The listener for this page's listvie
+	 * @param mainStage
+	 */
 	private void showItemInputDialog(Stage mainStage) {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();

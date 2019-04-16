@@ -12,7 +12,7 @@ import javafx.scene.control.ButtonType;
 
 /**
  * This data structure represents a user
- * @author Jake
+ * @author Jake, Tom
  *
  */
 
@@ -59,15 +59,27 @@ public class User implements Serializable{
 		return this.username;
 	}
 	
+	/**
+	 * returns the name of this user
+	 */
 	@Override
 	public String toString() {
 		return this.username;
 	}
 	
+	/**
+	 * retrieves the observable list of albums for this user when requested by the controller
+	 * @return
+	 */
 	public ObservableList<Album> getAlbums(){
 		return this.myAlbums;
 	}
 	
+	/**
+	 * Add a blank album to the user
+	 * @param n the name of the album
+	 * @return the Album instance of the new album
+	 */
 	public Album addAlbum(String n) {
 		String name = n.trim();
 		String existing_name;
@@ -89,20 +101,37 @@ public class User implements Serializable{
 		
 	}
 	
+	/**
+	 * Add an existing ablum to this user
+	 * @param alb the Album to add
+	 * @return The album that we just added
+	 */
 	public Album addAlbum(Album alb) {
 		
 		myAlbums.add(alb);
 		return alb;
-		
-		
 	}
 	
+	/**
+	 * returns an array list of the tags of this user
+	 * @return
+	 */
 	public ArrayList<String> getTags(){
 		return this.tags;
 	}
+	
+	/**
+	 * Add a tag for this user
+	 * @param n
+	 */
 	public void addTag(String n) {
 		tags.add(n);
 	}
+	
+	/**
+	 * Remove an album of the given name from the user
+	 * @param name the name of the album to remove
+	 */
 	public void removeAlbum(String name) {
 		name = name.toLowerCase();
 		String existingName;
@@ -123,10 +152,20 @@ public class User implements Serializable{
 		return;
 	}
 	
+	/**
+	 * Get the album at the indicated index from the list of albums
+	 * @param i index to get the album from
+	 * @return the album at the index value
+	 */
 	public Album getAlbumAt(int i) {
 		return myAlbums.get(i);
 	}
 	
+	/**
+	 * Get the album of the indicated name from the list of albums
+	 * @param str the name of the album
+	 * @return the al;bum with the input name value
+	 */
 	public Album getAlbumByName(String str) {
 		String existing;
 		String name = str.toLowerCase();
@@ -146,9 +185,19 @@ public class User implements Serializable{
 		return null;
 	}
 	
+	/**
+	 * Gets the observable list of the album this user has when requested by the controller
+	 * @return
+	 */
 	public ObservableList<Album> populateAlbumList() {
 		return myAlbums;
 	}
+	
+	/**
+	 * Checks to see if the album of the given name exists for this user
+	 * @param n the name of the album to check for
+	 * @return true if the album exists for this user, false otherwise
+	 */
 	public boolean album_exists(String n) {
 		
 		String name = n.toLowerCase();
@@ -176,6 +225,10 @@ public class User implements Serializable{
 		}
 	}
 	
+	/**
+	 * Saves the list of albums for this user into a serializable array list
+	 * Tells the photos to do the same for their tags
+	 */
 	public void serialize() {
 		serializable_album_list = new ArrayList<Album>(myAlbums);
 		for(int i = 0; i < myAlbums.size(); i++) {

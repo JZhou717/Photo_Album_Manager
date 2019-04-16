@@ -1,6 +1,7 @@
 //Thomas Heck tah167 Jake Zhou xz346
 package view;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -22,7 +23,11 @@ import model.Photo;
 import model.Search;
 import model.Tag;
 
-
+/**
+ * This is the controller for the search page
+ * @author Jake
+ *
+ */
 public class SearchController {
 	@FXML
 	public TextField tagToAdd;
@@ -45,8 +50,15 @@ public class SearchController {
 	@FXML 
 	ImageView imageView;
 	
+	/**
+	 * The list of Photos that will result from the search
+	 */
 	private ObservableList<Photo> obsList = FXCollections.observableArrayList();
 	
+	/**
+	 * Boots up the search page to be ready to use
+	 * @param mainStage
+	 */
 	public void init(Stage mainStage) {
 		
 		listView.setItems(obsList);
@@ -85,6 +97,10 @@ public class SearchController {
 		
 	}
 	
+	/**
+	 * The listener for this page's listview
+	 * @param mainStage
+	 */
 	private void showItemInputDialog(Stage mainStage) {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();
@@ -102,7 +118,11 @@ public class SearchController {
 		
 	}
 	
-	public void backClick(ActionEvent event) throws Exception {
+	/**
+	 * Goes back to the User album page
+	 * @param event that comes from the back button
+	 */
+	public void backClick(ActionEvent event) {
 		tagListView.setItems(null);
 		imageView.setImage(null);
 		captionText.setText("Caption: ");
@@ -119,6 +139,10 @@ public class SearchController {
 		*/
 		
 	}
+	
+	/**
+	 * Goes right on the slideshow of photos
+	 */
 	public void rightClick() {
 		if (listView.getSelectionModel().getSelectedItem()==null) {
 			return;
@@ -131,6 +155,10 @@ public class SearchController {
 		}
 		
 	}
+	
+	/**
+	 * goes left on the slideshow of photos
+	 */
 	public void leftClick() {
 		if (listView.getSelectionModel().getSelectedItem()==null) {
 			return;
@@ -144,6 +172,9 @@ public class SearchController {
 		
 	}
 	
+	/**
+	 * Filters this user's photos to the display only the ones of the given type
+	 */
 	public void filterClick() {
 		
 		String name = typeFilter.getValue();
@@ -253,16 +284,27 @@ public class SearchController {
 		listView.getSelectionModel().select(0);
 	}
 	
-	public void logoutClick(ActionEvent event) throws Exception {
+	/**
+	 * Saves the data of the user and goes to the login page
+	 * @param event that comes from the logout click button
+	 * @throws IOException in case something goes wrong during serialization
+	 */
+	public void logoutClick(ActionEvent event) throws IOException{
 		tagListView.setItems(null);
 		imageView.setImage(null);
 		captionText.setText("Caption: ");
 		dateText.setText("Photo from: ");
+		PhotosController.serialize();
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
 	}
 	
+	/**
+	 * Creats an album from the results of the search
+	 * @param event
+	 * @throws Exception
+	 */
 	public void create_album_from_result(ActionEvent event) throws Exception {
 		
 		TextInputDialog tid = new TextInputDialog();

@@ -55,6 +55,10 @@ public class PhotosController {
 	 */
 	public static final String storeDir = "dat";
 	
+	/**
+	 * Retrieves the serialized data of this application and sets up each page to be ready to use
+	 * @param primaryStage
+	 */
 	public static void start(Stage primaryStage) {
 		try {
 			
@@ -121,7 +125,11 @@ public class PhotosController {
 			return;
 		}
 	}
-	//writing functions here
+	
+	/**
+	 * Saves the name of the current album we are viewing
+	 * @param name of the album that we are viewing in open album screen
+	 */
 	public static void set_album(String name) {
 		if(PhotosController.admin.getUserByName(current_user).album_exists(name)) {
 			current_album = name;
@@ -144,15 +152,21 @@ public class PhotosController {
 	
 	/**
 	 * Retrieves the current user
+	 * @return the name of the current user
 	 */
 	public static String get_user() {
 		return current_user;
 	}
+	
+	/**
+	 * Retrieves the current album we are viewing
+	 * @return the name of the current album
+	 */
 	public static String get_album() {
 		return current_album;
 	}
 	
-	/*
+	/**
 	 * Reads the serialized data back into the program
 	 * @throws IOException if something is wrong with the file we are trying to access
 	 */

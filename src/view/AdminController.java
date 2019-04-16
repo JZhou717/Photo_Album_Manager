@@ -29,6 +29,9 @@ public class AdminController {
 	//The observable list of the users
 	private ObservableList<User> obsList = FXCollections.observableArrayList();
 	
+	/**
+	 * The action associated with the add user album. Adds a user to the list of users
+	 */
 	public void addUserClick() {
 		String name = usernameToAdd.getText().trim();
 		
@@ -48,6 +51,9 @@ public class AdminController {
 		}
 	}
 	
+	/**
+	 * The aciton associated with the delete user click. Removes the user with the name taken from the assocaited text field
+	 */
 	public void deleteUserClick() {
 		String name = usernameToDelete.getText().trim();
 		
@@ -63,8 +69,14 @@ public class AdminController {
 		}
 	}
 	
+	/**
+	 * Takes us back to the login page after serializing
+	 * @param event
+	 * @throws Exception
+	 */
 	public void logoutClick(ActionEvent event) throws Exception {
 		
+		PhotosController.serialize();
 		PhotosController.stage.setScene(PhotosController.login_scene);
 		PhotosController.stage.show();
 
@@ -91,6 +103,10 @@ public class AdminController {
 		
 	}
 	
+	/**
+	 * The listener for the listview of users
+	 * @param mainStage the stage that we are checking the list on
+	 */
 	private void showItemInputDialog(Stage mainStage) {
 		
 		int index = listView.getSelectionModel().getSelectedIndex();
