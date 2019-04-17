@@ -26,7 +26,9 @@ public class AdminController {
 	@FXML
 	ListView<User> listView;
 	
-	//The observable list of the users
+	/**
+	 * The observable list of the users
+	 */
 	private ObservableList<User> obsList = FXCollections.observableArrayList();
 	
 	/**

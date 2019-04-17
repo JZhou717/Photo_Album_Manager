@@ -28,7 +28,9 @@ public class UserAlbumController {
 	@FXML
 	ListView<Album> listView;
 	
-	//observable list of albums
+	/**
+	 * observable list of albums
+	 */
 	private ObservableList<Album> obsList = FXCollections.observableArrayList();
 	
 	/**
