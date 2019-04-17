@@ -206,11 +206,8 @@ public class SearchController {
 			for (int i=0;i<obsList.size();i++) {
 				
 				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("jpg")){
-					
 					filterList.add(obsList.get(i));
 				}
-			
-			
 			}
 			
 		}
@@ -219,19 +216,14 @@ public class SearchController {
 				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("png")){
 					filterList.add(obsList.get(i));
 				}
-			
 			}
-			
 		}
 		if (name.equals("gif")) {
 			for (int i=0;i<obsList.size();i++) {
 				if (obsList.get(i).toString().substring(obsList.get(i).toString().length()-3).equals("gif")){
 					filterList.add(obsList.get(i));
 				}
-			
 			}
-			
-			
 		}
 	
 		listView.setItems(filterList);
@@ -273,26 +265,24 @@ public class SearchController {
 		String tag = tagToSearch.getText();
 		
 		//If searching for two tags
-		if(tag.indexOf("AND") != -1 || tag.indexOf("OR") != -1) {
+		if(tag.indexOf(" AND ") != -1 || tag.indexOf(" OR ") != -1) {
 			//Parsing the tags into two
 			String[] tags_list;
 			String tag1;
 			String tag2;
 			
-			if(tag.indexOf("AND") != -1) {
-				tags_list = tag.split("AND", 2);
+			if(tag.indexOf(" AND ") != -1) {
+				tags_list = tag.split(" AND ", 2);
 			}
 			else {
-				tags_list = tag.split("OR", 2);
+				tags_list = tag.split(" OR ", 2);
 			}
 			
 			tag1 = tags_list[0].trim();
 			tag2 = tags_list[1].trim();
 			
 			ObservableList<Photo> list1 = Search.search_tag(tag1);
-			
 			ObservableList<Photo> list2 = Search.search_tag(tag2);
-			
 			obsList = Search.merge_lists(list1, list2);
 			
 		}

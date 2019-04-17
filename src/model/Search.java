@@ -40,6 +40,20 @@ public class Search{
 			}
 		}
 		
+		Photo photo1;
+		//Going through the whole list
+		for(int i = 0; i < ret.size() - 1; i++) {
+			photo1 = ret.get(i);
+			//Going through the rest of the list
+			for(int j = i + 1; j < ret.size(); j++) {
+				photo2 = ret.get(j);
+				if(photo1.equals(photo2)) {
+					ret.remove(j);
+					j--;
+				}
+			}
+		}
+		
 		return ret;
 		
 	}

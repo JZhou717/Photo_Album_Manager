@@ -6,11 +6,11 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.Album;
 
@@ -95,6 +95,11 @@ public class UserAlbumController {
 		tid.setContentText("New Name: ");
 		String result = tid.showAndWait().orElse(null);
 		if (result==null) {
+			return;
+		}
+		if(PhotosController.admin.getUserByName(PhotosController.get_user()).album_exists(result)) {
+			Alert alert = new Alert(AlertType.ERROR, "Album name already in use", ButtonType.OK);
+			alert.show();
 			return;
 		}
 		PhotosController.admin.getUserByName(PhotosController.get_user()).getAlbumByName(name).rename(result);
